@@ -67,11 +67,6 @@ button,
   color: var(--color-sidebar-copy);
 }
 
-/* Sidebar borders in dark mode - use subtle gray instead of blue */
-.dark .sidebar-gradient .border-blue-200\/30 {
-  border-color: var(--color-sidebar-accent-border);
-}
-
 /* ==================== Sidebar Overlay ==================== */
 .sidebar-overlay {
   position: fixed;
@@ -150,6 +145,8 @@ button,
   -webkit-backdrop-filter: none;
 }
 
+/* Modal surfaces and their controls must stay opaque over the bg-* utilities
+   that modal containers still carry until they use the shared Modal shell. */
 .dark .modal-card {
   background-color: var(--color-surface) !important; /* solid gray-900, no glass */
   backdrop-filter: none !important;
@@ -173,9 +170,8 @@ button,
 }
 
 /* ==================== Glass Cards ==================== */
-.glass-card,
-.bg-white.rounded-lg.shadow {
-  background-color: var(--color-surface-raised) !important;
+.glass-card {
+  background-color: var(--color-surface-raised);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-border-subtle);
@@ -189,7 +185,7 @@ button,
   z-index: 30;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background-color: var(--color-header) !important;
+  background-color: var(--color-header);
   border-bottom: 1px solid var(--color-sidebar-border);
 }
 
@@ -244,7 +240,7 @@ button,
   background-color: var(--color-selection);
 }
 
-/* Protect Monaco Editor internal textarea from global textarea styles */
+/* Protect Monaco Editor internal textarea from global textarea styles (third-party compatibility) */
 .monaco-editor textarea,
 .monaco-editor .inputarea {
   background-color: transparent !important;
@@ -292,7 +288,7 @@ button,
   font-size: 18px;
   white-space: pre-wrap;
   word-break: break-all;
-  background-color: var(--color-log-surface) !important;
+  background-color: var(--color-log-surface);
   color: var(--color-log-text);
   border: 1px solid var(--color-log-border);
 }
@@ -312,17 +308,19 @@ button,
 }
 
 /* ==================== Provider Item ==================== */
-.provider-item {
-  @apply p-3 rounded-lg cursor-pointer transition-colors;
-}
-
 .dark .provider-item:hover {
   background-color: var(--color-item-hover);
 }
 
-.dark .provider-item.bg-blue-50 {
-  background-color: var(--color-accent-selected) !important;
-  border-color: var(--color-accent-selected-border);
+.provider-item-selected {
+  background-color: var(--color-item-selected);
+  border-color: var(--color-item-selected-border);
+}
+
+/* The selected color must beat the dark hover color. */
+.dark .provider-item.provider-item-selected {
+  background-color: var(--color-item-selected);
+  border-color: var(--color-item-selected-border);
 }
 
 /* ==================== Monaco Editor ==================== */

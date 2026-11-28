@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col md:flex-row gap-6 md:h-[calc(100vh-8rem)]">
     <!-- Left: Provider List -->
-    <div class="w-full md:w-1/3 max-h-64 md:max-h-none bg-white rounded-lg shadow p-6 flex flex-col overflow-hidden">
+    <div class="w-full md:w-1/3 max-h-64 md:max-h-none glass-card rounded-lg shadow p-6 flex flex-col overflow-hidden">
       <div class="flex justify-between items-center mb-6 flex-shrink-0">
         <h3 class="text-lg font-semibold text-theme-strong">
           {{ $t('pages.provider.title') }}
@@ -24,7 +24,7 @@
             v-for="provider in providers"
             :key="provider.id"
             class="provider-item flex items-center p-3 rounded-lg cursor-pointer transition-colors hover:bg-gray-100"
-            :class="{ 'bg-blue-50 border border-blue-200': selectedId === provider.id, 'border border-transparent': selectedId !== provider.id }"
+            :class="{ 'provider-item-selected border': selectedId === provider.id, 'border border-transparent': selectedId !== provider.id }"
             @click="selectProvider(provider.id)"
           >
             <div class="mr-3">
@@ -48,7 +48,7 @@
     </div>
 
     <!-- Right: Provider Config Panel -->
-    <div class="w-full md:w-2/3 bg-white rounded-lg shadow p-6 flex flex-col">
+    <div class="w-full md:w-2/3 glass-card rounded-lg shadow p-6 flex flex-col">
       <div v-if="!selectedId" class="flex justify-center items-center flex-1">
         <div class="text-center">
           <IconCpu class="w-16 h-16 text-theme-faint mx-auto mb-4" />

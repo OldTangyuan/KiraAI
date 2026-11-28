@@ -227,7 +227,7 @@
         <div
           v-for="server in mcpServers"
           :key="server.id"
-          class="bg-white dark:bg-gray-900 rounded-lg shadow p-4 flex flex-col cursor-pointer transition-shadow hover:shadow-md"
+          class="glass-card rounded-lg shadow p-4 flex flex-col cursor-pointer transition-shadow hover:shadow-md"
           @click="openMcpTools(server)"
         >
           <div class="flex items-start justify-between mb-3">
@@ -312,7 +312,7 @@
         <div
           v-for="skill in skills"
           :key="skill.id"
-          class="bg-white dark:bg-gray-900 rounded-lg shadow p-4 flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="glass-card rounded-lg shadow p-4 flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
           role="button"
           tabindex="0"
           :aria-label="$t('plugin.skills_preview_label', { name: skill.name })"
@@ -386,7 +386,7 @@
         <template v-for="(resources, type) in scopeResources" :key="type">
           <div v-if="resources.length > 0" class="mb-6">
             <h4 class="text-sm font-semibold text-theme-body mb-3">{{ $t(scopeSectionLabels[type]) }}</h4>
-            <div v-for="resource in resources" :key="resource.id" class="bg-white dark:bg-gray-900 rounded-lg shadow p-4 mb-3">
+            <div v-for="resource in resources" :key="resource.id" class="glass-card rounded-lg shadow p-4 mb-3">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-sm font-medium text-theme-strong">{{ resource.name }}</span>
                 <div class="flex items-center space-x-0.5 flex-shrink-0">
@@ -615,7 +615,7 @@
 
       <!-- Plugin Sources Management Modal -->
       <Modal v-model="sourceManageVisible" content-class="max-w-lg">
-        <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
+        <div class="glass-card rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
           <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
             <h3 class="text-lg font-semibold text-theme-strong">{{ $t('pluginStore.source_manage') }}</h3>
             <button type="button" class="text-theme-faint text-theme-faint-hover" @click="sourceManageVisible = false">
@@ -712,7 +712,7 @@
     </div>
 
     <Modal v-model="storeInstallVisible" content-class="max-w-lg">
-      <div v-if="storeInstallTarget" class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
+      <div v-if="storeInstallTarget" class="glass-card rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
         <div class="flex items-start justify-between px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('pluginStore.install_details_title') }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="storeInstallVisible = false"><IconClose class="w-6 h-6" /></button>
@@ -756,7 +756,7 @@
 
     <!-- Install Plugin Dialog -->
     <Modal v-model="installDialogVisible" content-class="max-w-md">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
+      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
         <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.install_add') }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="installDialogVisible = false">
@@ -831,7 +831,7 @@
 
     <!-- Update Plugin Dialog -->
     <Modal v-model="updateDialogVisible" content-class="max-w-md">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
+      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
         <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.update') }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="updateDialogVisible = false">
@@ -884,7 +884,7 @@
 
     <!-- Plugin Details Dialog -->
     <Modal v-model="pluginDetailsVisible" content-class="max-w-4xl">
-      <div v-if="selectedPlugin" class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full h-[90dvh] flex flex-col overflow-hidden">
+      <div v-if="selectedPlugin" class="glass-card rounded-lg shadow-xl w-full h-[90dvh] flex flex-col overflow-hidden">
         <div class="flex items-start justify-between px-6 py-4 border-b border-divider">
           <div class="min-w-0 pr-4">
             <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.details_title') }}</h3>
@@ -977,7 +977,7 @@
     </Modal>
 
     <Modal v-model="pluginConfigVisible" content-class="max-w-md">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
+      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
         <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <div>
             <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.config_modal_title') }}</h3>
@@ -1010,7 +1010,7 @@
 
     <!-- Skills Upload Dialog -->
     <Modal v-model="skillsUploadVisible" content-class="max-w-md">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
+      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
         <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.skills_upload') }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="skillsUploadVisible = false">
@@ -1036,7 +1036,7 @@
 
     <!-- MCP Config Dialog -->
     <Modal v-model="mcpDialogVisible" content-class="max-w-4xl">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 95vh;">
+      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 95vh;">
         <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ mcpEditMode ? $t('plugin.mcp_edit') : $t('plugin.mcp_add') }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="mcpDialogVisible = false">
@@ -1083,7 +1083,7 @@
 
     <!-- MCP Tools Dialog -->
     <Modal v-model="mcpToolsDialogVisible" content-class="max-w-2xl">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 80vh;">
+      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 80vh;">
         <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.mcp_tools_title', { name: selectedMcpServer?.name || selectedMcpServer?.id || '' }) }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="mcpToolsDialogVisible = false">

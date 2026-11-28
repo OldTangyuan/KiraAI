@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-lg shadow p-6 dark:bg-gray-800 dark:shadow-gray-900/50">
+  <div class="glass-card rounded-lg shadow p-6 dark:shadow-gray-900/50">
     <!-- Header -->
     <div class="flex justify-between items-center mb-6">
       <h3 class="text-lg font-semibold text-theme-strong">{{ $t('logs.title') }}</h3>

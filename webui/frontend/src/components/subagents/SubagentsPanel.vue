@@ -56,7 +56,7 @@
       <article
         v-for="preset in filteredPresets"
         :key="preset.id"
-        class="bg-white dark:bg-gray-900 rounded-lg shadow p-4 flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+        class="glass-card rounded-lg shadow p-4 flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
         role="button"
         :tabindex="operationsBusy ? -1 : 0"
         :aria-disabled="operationsBusy"

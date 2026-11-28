@@ -27,7 +27,7 @@
       <div
         v-for="persona in personas"
         :key="persona.id"
-        class="bg-white dark:bg-gray-900 rounded-lg shadow p-5 flex flex-col justify-between"
+        class="glass-card rounded-lg shadow p-5 flex flex-col justify-between"
       >
         <div>
           <div class="flex items-start justify-between mb-3 min-w-0">

@@ -6,14 +6,14 @@
     :aria-hidden="hidden"
   >
     <!-- Logo -->
-    <div v-if="!collapsed" class="p-6 shrink-0 border-b border-blue-200/30">
+    <div v-if="!collapsed" class="p-6 shrink-0 border-b sidebar-accent-border">
       <h1 class="text-2xl font-bold text-theme-strong">{{ $t('app.title') }}</h1>
       <p id="app-version" class="text-sm text-theme-supporting mt-1">{{ appVersion }}</p>
     </div>
 
     <!-- Navigation -->
     <nav class="flex-1 min-h-0 space-y-2 overflow-y-auto" :class="collapsed ? 'sidebar-nav--collapsed p-2' : 'p-4'">
-      <div v-for="group in navGroups" :key="group.id" class="space-y-2" :class="{ 'pt-4': !collapsed && group.label && isSectionGroupStyle, 'border-t border-blue-200/30 pt-2': collapsed && group.label }">
+      <div v-for="group in navGroups" :key="group.id" class="space-y-2" :class="{ 'pt-4': !collapsed && group.label && isSectionGroupStyle, 'border-t sidebar-accent-border pt-2': collapsed && group.label }">
         <button
           v-if="group.label && !collapsed"
           :id="`sidebar-group-${group.id}`"
@@ -45,7 +45,7 @@
           v-show="collapsed || !group.label || expandedGroups.has(group.id)"
           :id="`sidebar-group-items-${group.id}`"
           class="space-y-2"
-          :class="{ 'ml-4 pl-4 border-l border-blue-200/30': !collapsed && group.label && !isSectionGroupStyle }"
+          :class="{ 'ml-4 pl-4 border-l sidebar-accent-border': !collapsed && group.label && !isSectionGroupStyle }"
           :role="group.label ? 'group' : undefined"
           :aria-labelledby="group.label && !collapsed ? `sidebar-group-${group.id}` : undefined"
           :aria-label="collapsed ? group.label : undefined"
@@ -79,7 +79,7 @@
     </nav>
 
     <!-- Language Selector -->
-    <div v-if="!collapsed" class="p-4 shrink-0 border-t border-blue-200/30">
+    <div v-if="!collapsed" class="p-4 shrink-0 border-t sidebar-accent-border">
       <CustomSelect
         v-model="currentLanguage"
         :options="languageOptions"
@@ -174,6 +174,10 @@ function isActive(path: string): boolean {
 </script>
 
 <style scoped>
+.sidebar-accent-border {
+  border-color: var(--color-sidebar-accent-border);
+}
+
 .sidebar-gradient {
   width: 16rem;
   overflow: hidden;
