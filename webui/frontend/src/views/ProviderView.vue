@@ -175,82 +175,70 @@
     </div>
 
     <!-- Create Provider Dialog -->
-    <Modal v-model="createDialogVisible" content-class="max-w-md">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">{{ $t('provider.add') }}</h3>
-          <button class="text-theme-faint text-theme-faint-hover" @click="createDialogVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
+    <Modal v-model="createDialogVisible" content-class="max-w-md" :title="$t('provider.add')">
+      <div class="px-6 py-4 flex-1 overflow-y-auto">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('provider.name') }}</label>
+          <UiInput v-model="createForm.name" type="text" class="w-full rounded-lg px-3 py-2" :placeholder="$t('provider.name_placeholder') || 'Enter provider name...'" />
         </div>
-        <div class="px-6 py-4 flex-1 overflow-y-auto">
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('provider.name') }}</label>
-            <UiInput v-model="createForm.name" type="text" class="w-full rounded-lg px-3 py-2" :placeholder="$t('provider.name_placeholder') || 'Enter provider name...'" />
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('provider.type') }}</label>
-            <CustomSelect
-              v-model="createForm.type"
-              :options="providerTypes.map(type => ({
-                value: type.id,
-                label: localize(type, 'display_name', type.id),
-                icon: type.icon || null,
-                iconDark: type.icon_dark || null,
-              }))"
-              :placeholder="$t('provider.select_type') || 'Select provider type...'"
-              @update:modelValue="onCreateTypeChange"
-            />
-          </div>
-          <div v-if="createSchema">
-            <ConfigForm ref="createConfigFormRef" v-model="createForm.config" :schema="createSchema" />
-          </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('provider.type') }}</label>
+          <CustomSelect
+            v-model="createForm.type"
+            :options="providerTypes.map(type => ({
+              value: type.id,
+              label: localize(type, 'display_name', type.id),
+              icon: type.icon || null,
+              iconDark: type.icon_dark || null,
+            }))"
+            :placeholder="$t('provider.select_type') || 'Select provider type...'"
+            @update:modelValue="onCreateTypeChange"
+          />
         </div>
-        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
-          <button class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="createDialogVisible = false">{{ $t('provider.cancel') }}</button>
-          <button class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors" :disabled="creating" @click="handleCreate">{{ $t('provider.save') }}</button>
+        <div v-if="createSchema">
+          <ConfigForm ref="createConfigFormRef" v-model="createForm.config" :schema="createSchema" />
         </div>
       </div>
+      <template #footer>
+        <UiButton variant="secondary" @click="createDialogVisible = false">{{ $t('provider.cancel') }}</UiButton>
+        <UiButton :disabled="creating" @click="handleCreate">{{ $t('provider.save') }}</UiButton>
+      </template>
     </Modal>
 
     <!-- Add/Edit Model Dialog -->
-    <Modal v-model="modelDialogVisible" content-class="max-w-md">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full modal-card flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">{{ modelEditMode ? $t('provider.edit_model') : $t('provider.add_model') }}</h3>
-          <button class="text-theme-faint text-theme-faint-hover" @click="modelDialogVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
+    <Modal
+      v-model="modelDialogVisible"
+      content-class="max-w-md"
+      :title="modelEditMode ? $t('provider.edit_model') : $t('provider.add_model')"
+    >
+      <div class="px-6 py-4 flex-1 overflow-y-auto">
+        <!-- Model type label -->
+        <div class="mb-2">
+          <p class="text-sm text-theme-subtle">{{ $t(`provider.model_group_${modelForm.model_type}`) }}</p>
         </div>
-        <div class="px-6 py-4 flex-1 overflow-y-auto">
-          <!-- Model type label -->
-          <div class="mb-2">
-            <p class="text-sm text-theme-subtle">{{ $t(`provider.model_group_${modelForm.model_type}`) }}</p>
-          </div>
-          <div class="mb-4">
-            <div class="flex items-center mb-2">
-              <label class="block text-sm font-medium text-theme-body">{{ $t('provider.model_name') }}</label>
-              <div class="relative ml-1 group">
-                <button type="button" class="p-0.5" :aria-label="$t('provider.model_name_tooltip')">
-                  <IconInfo class="w-4 h-4 text-theme-faint cursor-help" />
-                </button>
-                <div role="tooltip" class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 bg-gray-800 dark:bg-gray-700 text-white text-xs rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50">
-                  {{ $t('provider.model_name_tooltip') }}
-                </div>
+        <div class="mb-4">
+          <div class="flex items-center mb-2">
+            <label class="block text-sm font-medium text-theme-body">{{ $t('provider.model_name') }}</label>
+            <div class="relative ml-1 group">
+              <button type="button" class="p-0.5" :aria-label="$t('provider.model_name_tooltip')">
+                <IconInfo class="w-4 h-4 text-theme-faint cursor-help" />
+              </button>
+              <div role="tooltip" class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 bg-gray-800 dark:bg-gray-700 text-white text-xs rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50">
+                {{ $t('provider.model_name_tooltip') }}
               </div>
             </div>
-            <UiInput v-model="modelForm.model_name" type="text" class="w-full rounded-lg px-3 py-2 transition-colors" :placeholder="$t('provider.model_name_placeholder')" />
-            <p class="text-xs text-theme-subtle mt-1">{{ $t('provider.model_name_hint') }}</p>
           </div>
-          <div v-if="modelSchema">
-            <ConfigForm ref="modelConfigFormRef" v-model="modelForm.config" :schema="modelSchema" />
-          </div>
+          <UiInput v-model="modelForm.model_name" type="text" class="w-full rounded-lg px-3 py-2 transition-colors" :placeholder="$t('provider.model_name_placeholder')" />
+          <p class="text-xs text-theme-subtle mt-1">{{ $t('provider.model_name_hint') }}</p>
         </div>
-        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
-          <button class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="modelDialogVisible = false">{{ $t('provider.cancel') }}</button>
-          <button class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors" :disabled="addingModel" @click="handleAddModel">{{ $t('provider.save') }}</button>
+        <div v-if="modelSchema">
+          <ConfigForm ref="modelConfigFormRef" v-model="modelForm.config" :schema="modelSchema" />
         </div>
       </div>
+      <template #footer>
+        <UiButton variant="secondary" @click="modelDialogVisible = false">{{ $t('provider.cancel') }}</UiButton>
+        <UiButton :disabled="addingModel" @click="handleAddModel">{{ $t('provider.save') }}</UiButton>
+      </template>
     </Modal>
 
     <ConfirmModal
@@ -273,88 +261,78 @@
     />
 
     <!-- Remote Model Selection Modal -->
-    <Modal v-model="remoteModelDialogVisible" content-class="max-w-2xl">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 80vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider flex-shrink-0">
-          <h3 class="text-lg font-semibold text-theme-strong">{{ $t('provider.fetch_remote_models') }}</h3>
-          <button class="text-theme-faint text-theme-faint-hover" @click="remoteModelDialogVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
+    <Modal
+      v-model="remoteModelDialogVisible"
+      content-class="max-w-2xl"
+      max-height="80vh"
+      :title="$t('provider.fetch_remote_models')"
+    >
+      <div class="px-6 py-4 flex-1 overflow-hidden flex flex-col">
+        <!-- Loading -->
+        <div v-if="remoteModelsLoading" class="flex justify-center items-center py-12">
+          <IconSpinner class="animate-spin h-8 w-8 text-status-info" />
+          <span class="ml-3 text-theme-supporting">{{ $t('provider.fetch_remote_loading') }}</span>
         </div>
-        <div class="px-6 py-4 flex-1 overflow-hidden flex flex-col">
-          <!-- Loading -->
-          <div v-if="remoteModelsLoading" class="flex justify-center items-center py-12">
-            <IconSpinner class="animate-spin h-8 w-8 text-status-info" />
-            <span class="ml-3 text-theme-supporting">{{ $t('provider.fetch_remote_loading') }}</span>
+        <!-- Empty -->
+        <div v-else-if="remoteModels.length === 0" class="flex justify-center items-center py-12">
+          <p class="text-theme-subtle">{{ $t('provider.fetch_remote_empty') }}</p>
+        </div>
+        <!-- Model list -->
+        <template v-else>
+          <!-- Search + Select all -->
+          <div class="flex items-center gap-3 mb-3 flex-shrink-0">
+            <UiInput
+              v-model="remoteModelSearch"
+              type="text"
+              :placeholder="$t('provider.search_model')"
+              class="flex-1 rounded-lg px-3 py-2 text-sm transition-colors"
+            />
+            <button
+              class="px-3 py-2 text-sm border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
+              @click="toggleAllRemoteModels"
+            >
+              {{ filteredRemoteModels.every(m => m.selected) ? $t('provider.deselect_all') : $t('provider.select_all') }}
+            </button>
           </div>
-          <!-- Empty -->
-          <div v-else-if="remoteModels.length === 0" class="flex justify-center items-center py-12">
-            <p class="text-theme-subtle">{{ $t('provider.fetch_remote_empty') }}</p>
-          </div>
-          <!-- Model list -->
-          <template v-else>
-            <!-- Search + Select all -->
-            <div class="flex items-center gap-3 mb-3 flex-shrink-0">
-              <UiInput
-                v-model="remoteModelSearch"
-                type="text"
-                :placeholder="$t('provider.search_model')"
-                class="flex-1 rounded-lg px-3 py-2 text-sm transition-colors"
+          <!-- Model list (scrollable) -->
+          <div class="flex-1 overflow-y-auto border border-divider rounded-lg divide-y divide-gray-100 dark:divide-gray-800">
+            <div
+              v-for="model in filteredRemoteModels"
+              :key="model.id"
+              class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors"
+              @click="model.selected = !model.selected"
+            >
+              <input
+                type="checkbox"
+                :checked="model.selected"
+                :aria-label="$t('provider.select_remote_model', { name: model.name || model.id })"
+                class="ui-checkbox mt-0.5"
+                @click.stop
+                @change="model.selected = !model.selected"
               />
-              <button
-                class="px-3 py-2 text-sm border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
-                @click="toggleAllRemoteModels"
-              >
-                {{ filteredRemoteModels.every(m => m.selected) ? $t('provider.deselect_all') : $t('provider.select_all') }}
-              </button>
-            </div>
-            <!-- Model list (scrollable) -->
-            <div class="flex-1 overflow-y-auto border border-divider rounded-lg divide-y divide-gray-100 dark:divide-gray-800">
-              <div
-                v-for="model in filteredRemoteModels"
-                :key="model.id"
-                class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors"
-                @click="model.selected = !model.selected"
-              >
-                <input
-                  type="checkbox"
-                  :checked="model.selected"
-                  :aria-label="$t('provider.select_remote_model', { name: model.name || model.id })"
-                  class="ui-checkbox mt-0.5"
-                  @click.stop
-                  @change="model.selected = !model.selected"
-                />
-                <div class="flex-1 min-w-0">
-                  <div class="text-sm font-medium text-theme-high truncate">{{ model.name || model.id }}</div>
-                  <div v-if="model.name && model.name !== model.id" class="text-xs text-theme-subtle mt-0.5 truncate">{{ model.id }}</div>
-                  <div v-if="model.description" class="text-xs text-theme-subtle mt-1 line-clamp-2">{{ model.description }}</div>
-                </div>
-              </div>
-              <div v-if="filteredRemoteModels.length === 0" class="px-4 py-6 text-center text-sm text-theme-subtle">
-                {{ $t('provider.fetch_remote_no_match') }}
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium text-theme-high truncate">{{ model.name || model.id }}</div>
+                <div v-if="model.name && model.name !== model.id" class="text-xs text-theme-subtle mt-0.5 truncate">{{ model.id }}</div>
+                <div v-if="model.description" class="text-xs text-theme-subtle mt-1 line-clamp-2">{{ model.description }}</div>
               </div>
             </div>
-            <!-- Selected count -->
-            <div class="mt-3 text-sm text-theme-supporting flex-shrink-0">
-              {{ $t('provider.selected_count', { count: selectedRemoteModelCount }) }}
-              <span v-if="remoteModelExistingIds.size > 0" class="ml-2">
-                · {{ $t('provider.existing_count', { count: remoteModelExistingIds.size }) }}
-              </span>
+            <div v-if="filteredRemoteModels.length === 0" class="px-4 py-6 text-center text-sm text-theme-subtle">
+              {{ $t('provider.fetch_remote_no_match') }}
             </div>
-          </template>
-        </div>
-        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3 flex-shrink-0">
-          <button
-            class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            @click="remoteModelDialogVisible = false"
-          >{{ $t('provider.cancel') }}</button>
-          <button
-            class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50"
-            :disabled="remoteModelsLoading || !hasRemoteModelChanges"
-            @click="handleSyncRemoteModels"
-          >{{ $t('provider.sync_models') }}</button>
-        </div>
+          </div>
+          <!-- Selected count -->
+          <div class="mt-3 text-sm text-theme-supporting flex-shrink-0">
+            {{ $t('provider.selected_count', { count: selectedRemoteModelCount }) }}
+            <span v-if="remoteModelExistingIds.size > 0" class="ml-2">
+              · {{ $t('provider.existing_count', { count: remoteModelExistingIds.size }) }}
+            </span>
+          </div>
+        </template>
       </div>
+      <template #footer>
+        <UiButton variant="secondary" @click="remoteModelDialogVisible = false">{{ $t('provider.cancel') }}</UiButton>
+        <UiButton :disabled="remoteModelsLoading || !hasRemoteModelChanges" @click="handleSyncRemoteModels">{{ $t('provider.sync_models') }}</UiButton>
+      </template>
     </Modal>
   </div>
 </template>
@@ -377,6 +355,7 @@ import CustomSelect from '@/components/common/CustomSelect.vue'
 import ConfirmModal from '@/components/common/ConfirmModal.vue'
 import Modal from '@/components/common/Modal.vue'
 import UiInput from '@/components/ui/UiInput.vue'
+import UiButton from '@/components/ui/UiButton.vue'
 import { IconClose, IconPlus, IconCpu, IconChevronDown, IconRefresh, IconSpinner, IconPulse, IconSliders, IconInfo } from '@/components/icons'
 import type { ProviderResponse, ProviderType } from '@/types'
 

@@ -23,20 +23,16 @@
         <slot></slot>
       </div>
       <div class="px-6 pb-6 flex justify-end space-x-3">
-        <button
-          class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-          @click="onCancel"
-        >
+        <UiButton variant="secondary" @click="onCancel">
           {{ cancelText }}
-        </button>
-        <button
-          :class="variant === 'info' ? 'bg-blue-600 dark:bg-blue-700 hover:bg-blue-700 dark:hover:bg-blue-600' : 'bg-red-600 dark:bg-red-700 hover:bg-red-700 dark:hover:bg-red-600'"
-          class="px-4 py-2 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        </UiButton>
+        <UiButton
+          :variant="variant === 'info' ? 'primary' : 'danger'"
           :disabled="confirmDisabled"
           @click="onConfirm"
         >
           {{ confirmText }}
-        </button>
+        </UiButton>
       </div>
     </div>
   </Modal>
@@ -45,6 +41,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Modal from './Modal.vue'
+import UiButton from '../ui/UiButton.vue'
 import { IconInfo, IconWarning } from '@/components/icons'
 
 const props = withDefaults(defineProps<{

@@ -2,6 +2,7 @@ export default {
   common: {
     code_plain_text: '纯文本',
     cancel: '取消',
+    close: '关闭',
     on: '启用',
     off: '禁用',
     delete: '删除',

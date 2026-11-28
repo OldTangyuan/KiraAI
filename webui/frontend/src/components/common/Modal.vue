@@ -10,7 +10,33 @@
       >
         <div class="modal-overlay absolute inset-0 bg-black bg-opacity-50" />
         <div ref="panelRef" tabindex="-1" class="modal-panel relative w-full mx-4" :class="contentClass" :style="contentStyle">
-          <slot />
+          <div v-if="hasShell" class="modal-card flex w-full flex-col rounded-lg shadow-xl" :style="{ maxHeight }">
+            <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
+              <div class="min-w-0">
+                <h3 class="text-lg font-semibold text-theme-strong">{{ title }}</h3>
+                <p v-if="description" class="mt-1 text-sm text-theme-subtle">{{ description }}</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <slot name="header-actions" />
+                <button
+                  v-if="closeable"
+                  type="button"
+                  class="text-theme-faint text-theme-faint-hover"
+                  :aria-label="closeLabel || t('common.close')"
+                  :disabled="closeDisabled"
+                  @click="close"
+                >
+                  <IconClose class="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+            <slot name="subheader" />
+            <slot />
+            <div v-if="$slots.footer" :class="footerClass">
+              <slot name="footer" />
+            </div>
+          </div>
+          <slot v-else />
         </div>
       </div>
     </Transition>
@@ -18,7 +44,9 @@
 </template>
 
 <script setup lang="ts">
-import { provide, ref, watch, onUnmounted } from 'vue'
+import { computed, provide, ref, useSlots, watch, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { IconClose } from '@/components/icons'
 import { modalPanelKey, registerModal } from './modalFocus'
 
 const props = withDefaults(defineProps<{
@@ -26,11 +54,32 @@ const props = withDefaults(defineProps<{
   contentClass?: string
   contentStyle?: string
   persistent?: boolean
+  title?: string
+  description?: string
+  maxHeight?: string
+  footerClass?: string
+  closeable?: boolean
+  closeDisabled?: boolean
+  closeLabel?: string
 }>(), {
   contentClass: '',
   contentStyle: '',
   persistent: false,
+  title: undefined,
+  description: undefined,
+  maxHeight: '90vh',
+  footerClass: 'flex justify-end space-x-3 px-6 py-4 border-t border-divider',
+  closeable: true,
+  closeDisabled: false,
+  closeLabel: '',
 })
+
+const slots = useSlots()
+const { t } = useI18n()
+
+// Existing callers pass their whole dialog as the default slot. The shell is
+// only enabled once a caller opts in with a title, footer or header-actions slot.
+const hasShell = computed(() => props.title !== undefined || !!slots.headerActions || !!slots.footer)
 
 const emit = defineEmits<{
   'update:modelValue': [value: boolean]

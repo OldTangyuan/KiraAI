@@ -22,6 +22,7 @@ runInNewContext(outputText, {
   require(id) {
     if (id === 'vue') return Vue
     if (id === './Modal.vue') return { default: {} }
+    if (id === '../ui/UiButton.vue') return { default: {} }
     if (id === '@/components/icons') return { IconWarning: {} }
     throw new Error(`Unexpected dependency: ${id}`)
   },
