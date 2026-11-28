@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl flex flex-col max-h-[90vh] modal-card">
+  <div class="rounded-lg shadow-xl flex flex-col max-h-[90vh] modal-card">
     <div class="flex items-center justify-between gap-4 px-6 py-4 border-b border-divider">
       <div class="min-w-0">
         <h3 class="text-lg font-semibold text-theme-strong break-all">{{ session.title || session.session_id || session.adapter_name || session.id }}</h3>

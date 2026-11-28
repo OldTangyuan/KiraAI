@@ -7,6 +7,11 @@ import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
 import './assets/main.css'
+import './assets/components/layout.css'
+import './assets/components/feedback.css'
+import './assets/components/logs.css'
+import './assets/components/editor.css'
+import './assets/components/loading.css'
 import { applyWebUITitle, CUSTOM_WEBUI_TITLE_KEY } from './utils/customWebUI'
 
 // Apply custom WebUI settings from localStorage on app startup

@@ -42,6 +42,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Guards the semantic token layering: no !important outside the Monaco
+      # compatibility block, no duplicate global selectors.
+      - name: Lint CSS
+        run: npm run lint:css
+
       # Unit suites plus the CN/EN i18n parity check.
       - name: Run unit tests
         run: npm test

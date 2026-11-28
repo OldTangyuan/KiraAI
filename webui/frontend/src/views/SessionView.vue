@@ -97,7 +97,7 @@
     content-class="max-w-4xl"
     content-style="max-height: 95vh;"
   >
-    <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl flex flex-col max-h-[95vh] modal-card">
+    <div class="rounded-lg shadow-xl flex flex-col max-h-[95vh] modal-card">
       <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
         <div class="flex-1 min-w-0">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('sessions.modal_title') }}</h3>
