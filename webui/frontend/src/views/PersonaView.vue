@@ -76,30 +76,27 @@
     </div>
 
     <!-- Creation Mode Modal -->
-    <Modal v-model="createModeVisible" content-class="max-w-2xl" content-style="width: 90%;">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">{{ $t('persona.create_mode_title') }}</h3>
-          <button class="text-theme-faint text-theme-faint-hover" @click="createModeVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6">
-          <button
-            class="text-left rounded-lg border border-blue-200 dark:border-blue-800 p-5 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
-            @click="openGeneratorDialog"
-          >
-            <h4 class="font-semibold text-theme-high">{{ $t('persona.create_with_ai') }}</h4>
-            <p class="mt-2 text-sm text-theme-supporting">{{ $t('persona.create_with_ai_hint') }}</p>
-          </button>
-          <button
-            class="text-left rounded-lg border border-divider p-5 hover:border-blue-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-            @click="openManualCreateDialog"
-          >
-            <h4 class="font-semibold text-theme-high">{{ $t('persona.create_manually') }}</h4>
-            <p class="mt-2 text-sm text-theme-supporting">{{ $t('persona.create_manually_hint') }}</p>
-          </button>
-        </div>
+    <Modal
+      v-model="createModeVisible"
+      content-class="max-w-2xl"
+      content-style="width: 90%;"
+      :title="$t('persona.create_mode_title')"
+    >
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6">
+        <button
+          class="text-left rounded-lg border border-blue-200 dark:border-blue-800 p-5 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
+          @click="openGeneratorDialog"
+        >
+          <h4 class="font-semibold text-theme-high">{{ $t('persona.create_with_ai') }}</h4>
+          <p class="mt-2 text-sm text-theme-supporting">{{ $t('persona.create_with_ai_hint') }}</p>
+        </button>
+        <button
+          class="text-left rounded-lg border border-divider p-5 hover:border-blue-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+          @click="openManualCreateDialog"
+        >
+          <h4 class="font-semibold text-theme-high">{{ $t('persona.create_manually') }}</h4>
+          <p class="mt-2 text-sm text-theme-supporting">{{ $t('persona.create_manually_hint') }}</p>
+        </button>
       </div>
     </Modal>
 
@@ -186,140 +183,131 @@
     </Modal>
 
     <!-- Create/Edit Modal -->
-    <Modal :model-value="dialogVisible" @update:model-value="setDialogVisible" :persistent="saving" content-class="max-w-4xl" content-style="width: 90%;">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">
-            {{ editMode ? $t('persona.edit_title') : $t('persona.modal_title') }}
-          </h3>
-          <button class="text-theme-faint text-theme-faint-hover" :disabled="saving" @click="setDialogVisible(false)">
-            <IconClose class="w-6 h-6" />
-          </button>
-        </div>
-        <div class="px-6 py-4 flex-1 overflow-y-auto">
+    <Modal
+      :model-value="dialogVisible"
+      @update:model-value="setDialogVisible"
+      :persistent="saving"
+      content-class="max-w-4xl"
+      content-style="width: 90%;"
+      :title="editMode ? $t('persona.edit_title') : $t('persona.modal_title')"
+      :close-disabled="saving"
+    >
+      <div class="px-6 py-4 flex-1 overflow-y-auto">
+        <div
+          class="mb-4 grid grid-cols-1 gap-x-5 gap-y-2 sm:grid-cols-[var(--reference-image-width)_minmax(10rem,1fr)]"
+          :style="{ '--reference-image-width': `${referenceImageHeight * referenceImageAspectRatio}px` }"
+        >
+          <label class="text-sm font-medium text-theme-body sm:col-start-1 sm:row-start-1" for="persona-reference-image">
+            {{ $t('persona.reference_image') }}
+          </label>
           <div
-            class="mb-4 grid grid-cols-1 gap-x-5 gap-y-2 sm:grid-cols-[var(--reference-image-width)_minmax(10rem,1fr)]"
-            :style="{ '--reference-image-width': `${referenceImageHeight * referenceImageAspectRatio}px` }"
+            ref="referenceImageControl"
+            class="group/reference-image relative h-40 w-[var(--reference-image-width)] sm:col-start-1 sm:row-start-2 sm:row-span-3 sm:h-auto sm:min-h-0 sm:w-full"
           >
-            <label class="text-sm font-medium text-theme-body sm:col-start-1 sm:row-start-1" for="persona-reference-image">
-              {{ $t('persona.reference_image') }}
-            </label>
-            <div
-              ref="referenceImageControl"
-              class="group/reference-image relative h-40 w-[var(--reference-image-width)] sm:col-start-1 sm:row-start-2 sm:row-span-3 sm:h-auto sm:min-h-0 sm:w-full"
-            >
-              <button
-                id="persona-reference-image"
-                type="button"
-                class="absolute inset-0 flex h-full w-full items-center justify-center overflow-hidden rounded-lg border border-dashed border-control bg-gray-50 transition-colors duration-300 hover:border-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:hover:!border-gray-500 dark:hover:bg-gray-700 disabled:opacity-50"
-                :aria-label="t('persona.select_reference_image')"
-                :disabled="saving || referenceImageLoading"
-                @click="referenceImageInput?.click()"
-              >
-                <img v-if="referenceImagePreview" :src="referenceImagePreview" :alt="t('persona.reference_image')" class="absolute inset-0 h-full w-full object-contain" @load="handleReferenceImageLoad" />
-                <span v-else class="px-3 text-sm text-theme-subtle">
-                  {{ referenceImageLoading ? t('persona.reference_image_loading') : t('persona.select_reference_image') }}
-                </span>
-              </button>
-              <button
-                v-if="!referenceImageRemoved && (referenceImagePreview || referenceImageStored)"
-                type="button"
-                class="pointer-events-none absolute right-2 top-2 z-10 rounded-full bg-black/60 p-1 text-white opacity-0 transition-[opacity,background-color] duration-200 hover:bg-black/80 group-hover/reference-image:pointer-events-auto group-hover/reference-image:opacity-100 focus-visible:pointer-events-auto focus-visible:opacity-100 disabled:cursor-not-allowed"
-                :aria-label="t('persona.remove_reference_image')"
-                :title="t('persona.remove_reference_image')"
-                :disabled="saving || referenceImageLoading"
-                @click="handleRemoveReferenceImage"
-              >
-                <IconClose class="h-4 w-4" />
-              </button>
-            </div>
-            <input
-              ref="referenceImageInput"
-              type="file"
-              accept=".png,.jpg,.jpeg,.webp"
-              class="hidden"
+            <button
+              id="persona-reference-image"
+              type="button"
+              class="absolute inset-0 flex h-full w-full items-center justify-center overflow-hidden rounded-lg border border-dashed border-control bg-gray-50 transition-colors duration-300 hover:border-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:hover:!border-gray-500 dark:hover:bg-gray-700 disabled:opacity-50"
+              :aria-label="t('persona.select_reference_image')"
               :disabled="saving || referenceImageLoading"
-              @change="handleReferenceImageChange"
-            />
-            <p class="text-xs text-theme-subtle sm:col-span-2 sm:col-start-1 sm:row-start-5">{{ $t('persona.reference_image_hint') }}</p>
-            <label class="mt-3 text-sm font-medium text-theme-body sm:col-start-2 sm:row-start-1 sm:mt-0" for="persona-name">
-              {{ $t('persona.modal_name_label') }}
-            </label>
-            <UiInput
-              id="persona-name"
-              v-model="form.name"
-              type="text"
-              class="w-full min-w-0 rounded-lg px-3 py-2 transition-colors sm:col-start-2 sm:row-start-2"
-              :placeholder="$t('persona.name')"
-              :disabled="saving"
-            />
-            <label class="pt-2 text-sm font-medium text-theme-body sm:col-start-2 sm:row-start-3">
-              {{ $t('persona.format') }}
-            </label>
-            <CustomSelect
-              v-model="form.format"
-              :options="formatOptions"
-              :placeholder="$t('persona.format')"
-              :disabled="saving"
-              class="min-w-0 sm:col-start-2 sm:row-start-4"
-            />
-          </div>
-          <div class="mb-4">
-            <div class="flex justify-between items-center mb-2">
-              <label class="block text-sm font-medium text-theme-body">
-                {{ $t('persona.modal_content_label') }}
-              </label>
-              <span class="text-xs text-theme-subtle tabular-nums">
-                {{ t('persona.char_count', { count: charCount }) }}
+              @click="referenceImageInput?.click()"
+            >
+              <img v-if="referenceImagePreview" :src="referenceImagePreview" :alt="t('persona.reference_image')" class="absolute inset-0 h-full w-full object-contain" @load="handleReferenceImageLoad" />
+              <span v-else class="px-3 text-sm text-theme-subtle">
+                {{ referenceImageLoading ? t('persona.reference_image_loading') : t('persona.select_reference_image') }}
               </span>
-            </div>
-            <MonacoEditor
-              v-model="form.content"
-              :language="monacoLanguage"
-              height="50vh"
-            />
+            </button>
+            <button
+              v-if="!referenceImageRemoved && (referenceImagePreview || referenceImageStored)"
+              type="button"
+              class="pointer-events-none absolute right-2 top-2 z-10 rounded-full bg-black/60 p-1 text-white opacity-0 transition-[opacity,background-color] duration-200 hover:bg-black/80 group-hover/reference-image:pointer-events-auto group-hover/reference-image:opacity-100 focus-visible:pointer-events-auto focus-visible:opacity-100 disabled:cursor-not-allowed"
+              :aria-label="t('persona.remove_reference_image')"
+              :title="t('persona.remove_reference_image')"
+              :disabled="saving || referenceImageLoading"
+              @click="handleRemoveReferenceImage"
+            >
+              <IconClose class="h-4 w-4" />
+            </button>
           </div>
-          <CollapsibleSection
-            class="mb-4"
-            :title="$t('persona.modal_chat_rules_label')"
-            :description="$t('persona.chat_rules_description')"
-            v-model:collapsed="chatRulesCollapsed"
-          >
-            <div class="flex flex-col gap-4">
-              <div v-for="field in chatRuleFields" :key="field.key">
-                <div class="flex justify-between items-center mb-2">
-                  <label class="block text-sm font-medium text-theme-body">
-                    {{ $t(field.label) }}
-                  </label>
-                  <span class="text-xs text-theme-subtle tabular-nums">
-                    {{ t('persona.char_count', { count: [...form[field.key]].length }) }}
-                  </span>
-                </div>
-                <MonacoEditor
-                  v-model="form[field.key]"
-                  :language="monacoLanguage"
-                  height="25vh"
-                />
-              </div>
-            </div>
-          </CollapsibleSection>
-        </div>
-        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
-          <button
-            class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            :disabled="saving" @click="setDialogVisible(false)"
-          >
-            {{ $t('persona.modal_cancel') }}
-          </button>
-          <button
-            class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50"
+          <input
+            ref="referenceImageInput"
+            type="file"
+            accept=".png,.jpg,.jpeg,.webp"
+            class="hidden"
+            :disabled="saving || referenceImageLoading"
+            @change="handleReferenceImageChange"
+          />
+          <p class="text-xs text-theme-subtle sm:col-span-2 sm:col-start-1 sm:row-start-5">{{ $t('persona.reference_image_hint') }}</p>
+          <label class="mt-3 text-sm font-medium text-theme-body sm:col-start-2 sm:row-start-1 sm:mt-0" for="persona-name">
+            {{ $t('persona.modal_name_label') }}
+          </label>
+          <UiInput
+            id="persona-name"
+            v-model="form.name"
+            type="text"
+            class="w-full min-w-0 rounded-lg px-3 py-2 transition-colors sm:col-start-2 sm:row-start-2"
+            :placeholder="$t('persona.name')"
             :disabled="saving"
-            @click="handleSave"
-          >
-            {{ $t('persona.modal_save') }}
-          </button>
+          />
+          <label class="pt-2 text-sm font-medium text-theme-body sm:col-start-2 sm:row-start-3">
+            {{ $t('persona.format') }}
+          </label>
+          <CustomSelect
+            v-model="form.format"
+            :options="formatOptions"
+            :placeholder="$t('persona.format')"
+            :disabled="saving"
+            class="min-w-0 sm:col-start-2 sm:row-start-4"
+          />
         </div>
+        <div class="mb-4">
+          <div class="flex justify-between items-center mb-2">
+            <label class="block text-sm font-medium text-theme-body">
+              {{ $t('persona.modal_content_label') }}
+            </label>
+            <span class="text-xs text-theme-subtle tabular-nums">
+              {{ t('persona.char_count', { count: charCount }) }}
+            </span>
+          </div>
+          <MonacoEditor
+            v-model="form.content"
+            :language="monacoLanguage"
+            height="50vh"
+          />
+        </div>
+        <CollapsibleSection
+          class="mb-4"
+          :title="$t('persona.modal_chat_rules_label')"
+          :description="$t('persona.chat_rules_description')"
+          v-model:collapsed="chatRulesCollapsed"
+        >
+          <div class="flex flex-col gap-4">
+            <div v-for="field in chatRuleFields" :key="field.key">
+              <div class="flex justify-between items-center mb-2">
+                <label class="block text-sm font-medium text-theme-body">
+                  {{ $t(field.label) }}
+                </label>
+                <span class="text-xs text-theme-subtle tabular-nums">
+                  {{ t('persona.char_count', { count: [...form[field.key]].length }) }}
+                </span>
+              </div>
+              <MonacoEditor
+                v-model="form[field.key]"
+                :language="monacoLanguage"
+                height="25vh"
+              />
+            </div>
+          </div>
+        </CollapsibleSection>
       </div>
+      <template #footer>
+        <UiButton variant="secondary" :disabled="saving" @click="setDialogVisible(false)">
+          {{ $t('persona.modal_cancel') }}
+        </UiButton>
+        <UiButton :disabled="saving" @click="handleSave">
+          {{ $t('persona.modal_save') }}
+        </UiButton>
+      </template>
     </Modal>
 
     <ConfirmModal
@@ -359,6 +347,7 @@ import ConfirmModal from '@/components/common/ConfirmModal.vue'
 import Modal from '@/components/common/Modal.vue'
 import UiInput from '@/components/ui/UiInput.vue'
 import UiTextarea from '@/components/ui/UiTextarea.vue'
+import UiButton from '@/components/ui/UiButton.vue'
 import { IconPlus, IconUser, IconClose } from '@/components/icons'
 import type { PersonaResponse } from '@/types'
 

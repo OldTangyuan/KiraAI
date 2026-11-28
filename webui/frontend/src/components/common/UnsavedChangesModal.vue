@@ -19,29 +19,15 @@
         <slot></slot>
       </div>
       <div class="px-6 pb-6 flex flex-col sm:flex-row sm:flex-wrap justify-end gap-3">
-        <button
-          type="button"
-          class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-          @click="onStay"
-        >
+        <UiButton variant="secondary" @click="onStay">
           {{ stayText }}
-        </button>
-        <button
-          type="button"
-          class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          :disabled="busy"
-          @click="onDiscard"
-        >
+        </UiButton>
+        <UiButton variant="secondary" :disabled="busy" @click="onDiscard">
           {{ discardText }}
-        </button>
-        <button
-          type="button"
-          class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          :disabled="busy"
-          @click="onSave"
-        >
+        </UiButton>
+        <UiButton :disabled="busy" @click="onSave">
           {{ saveText }}
-        </button>
+        </UiButton>
       </div>
     </div>
   </Modal>
@@ -49,6 +35,7 @@
 
 <script setup lang="ts">
 import Modal from './Modal.vue'
+import UiButton from '../ui/UiButton.vue'
 import { IconWarning } from '@/components/icons'
 
 defineProps<{

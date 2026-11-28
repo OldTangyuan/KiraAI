@@ -614,100 +614,83 @@
       </nav>
 
       <!-- Plugin Sources Management Modal -->
-      <Modal v-model="sourceManageVisible" content-class="max-w-lg">
-        <div class="glass-card rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-          <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-            <h3 class="text-lg font-semibold text-theme-strong">{{ $t('pluginStore.source_manage') }}</h3>
-            <button type="button" class="text-theme-faint text-theme-faint-hover" @click="sourceManageVisible = false">
-              <IconClose class="w-6 h-6" />
-            </button>
-          </div>
-          <div class="px-6 py-5 flex-1 overflow-y-auto space-y-4">
-            <p class="text-sm text-theme-subtle">{{ $t('pluginStore.source_manage_desc') }}</p>
+      <Modal v-model="sourceManageVisible" content-class="max-w-lg" :title="$t('pluginStore.source_manage')">
+        <div class="px-6 py-5 flex-1 overflow-y-auto space-y-4">
+          <p class="text-sm text-theme-subtle">{{ $t('pluginStore.source_manage_desc') }}</p>
 
-            <!-- Existing Sources List -->
-            <div v-if="pluginSources.length > 0" class="space-y-2">
-              <div
-                v-for="src in pluginSources"
-                :key="src.id"
-                class="flex items-center justify-between p-3 rounded-lg border transition-colors"
-                :class="currentStoreSource && currentStoreSource.id === src.id
-                  ? 'border-blue-300 bg-blue-50 dark:border-blue-700 dark:bg-blue-900/20'
-                  : 'border-divider bg-gray-50 dark:bg-gray-800'"
-              >
-                <div class="flex-1 min-w-0 mr-3">
-                  <div class="text-sm font-medium text-theme-high">{{ src.name }}</div>
-                  <div class="text-xs text-theme-subtle truncate">{{ src.url }}</div>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <button
-                    v-if="!currentStoreSource || currentStoreSource.id !== src.id"
-                    type="button"
-                    class="px-2.5 py-1 text-xs font-medium rounded-md border border-blue-300 text-status-info hover:bg-blue-50 dark:border-blue-600 dark:text-blue-400 dark:hover:bg-blue-900/30 transition-colors"
-                    @click="switchToSource(src)"
-                  >
-                    {{ $t('pluginStore.switch_source') }}
-                  </button>
-                  <span
-                    v-else
-                    class="px-2.5 py-1 text-xs font-medium rounded-md bg-status-info-soft text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
-                  >
-                    {{ $t('pluginStore.current_source') }}
-                  </span>
-                  <button
-                    type="button"
-                    class="px-2.5 py-1 text-xs font-medium rounded-md border border-red-300 text-status-danger hover:bg-red-50 dark:border-red-600 dark:text-red-400 dark:hover:bg-red-900/30 transition-colors"
-                    @click="removeSource(pluginSources.indexOf(src))"
-                  >
-                    {{ $t('pluginStore.remove_source') }}
-                  </button>
-                </div>
+          <!-- Existing Sources List -->
+          <div v-if="pluginSources.length > 0" class="space-y-2">
+            <div
+              v-for="src in pluginSources"
+              :key="src.id"
+              class="flex items-center justify-between p-3 rounded-lg border transition-colors"
+              :class="currentStoreSource && currentStoreSource.id === src.id
+                ? 'border-blue-300 bg-blue-50 dark:border-blue-700 dark:bg-blue-900/20'
+                : 'border-divider bg-gray-50 dark:bg-gray-800'"
+            >
+              <div class="flex-1 min-w-0 mr-3">
+                <div class="text-sm font-medium text-theme-high">{{ src.name }}</div>
+                <div class="text-xs text-theme-subtle truncate">{{ src.url }}</div>
               </div>
-            </div>
-            <div v-else class="text-center py-4 text-sm text-theme-faint">
-              {{ $t('pluginStore.no_sources') }}
-            </div>
-
-            <!-- Add New Source Form -->
-            <div class="border-t border-divider pt-4">
-              <div class="mb-3">
-                <label class="block text-sm font-medium text-theme-body mb-1">{{ $t('pluginStore.source_name') }}</label>
-                <UiInput
-                  v-model="newSourceName"
-                  type="text"
-                  :placeholder="$t('pluginStore.source_name_placeholder')"
-                  class="w-full rounded-lg px-3 py-2 transition-colors"
-                />
-              </div>
-              <div class="mb-3">
-                <label class="block text-sm font-medium text-theme-body mb-1">{{ $t('pluginStore.source_url') }}</label>
-                <UiInput
-                  v-model="newSourceUrl"
-                  type="text"
-                  :placeholder="$t('pluginStore.source_url_placeholder')"
-                  class="w-full rounded-lg px-3 py-2 transition-colors"
-                />
+              <div class="flex items-center space-x-2">
+                <button
+                  v-if="!currentStoreSource || currentStoreSource.id !== src.id"
+                  type="button"
+                  class="px-2.5 py-1 text-xs font-medium rounded-md border border-blue-300 text-status-info hover:bg-blue-50 dark:border-blue-600 dark:text-blue-400 dark:hover:bg-blue-900/30 transition-colors"
+                  @click="switchToSource(src)"
+                >
+                  {{ $t('pluginStore.switch_source') }}
+                </button>
+                <span
+                  v-else
+                  class="px-2.5 py-1 text-xs font-medium rounded-md bg-status-info-soft text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+                >
+                  {{ $t('pluginStore.current_source') }}
+                </span>
+                <button
+                  type="button"
+                  class="px-2.5 py-1 text-xs font-medium rounded-md border border-red-300 text-status-danger hover:bg-red-50 dark:border-red-600 dark:text-red-400 dark:hover:bg-red-900/30 transition-colors"
+                  @click="removeSource(pluginSources.indexOf(src))"
+                >
+                  {{ $t('pluginStore.remove_source') }}
+                </button>
               </div>
             </div>
           </div>
-          <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
-            <button
-              type="button"
-              class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-              @click="sourceManageVisible = false"
-            >
-              {{ $t('pluginStore.cancel') }}
-            </button>
-            <button
-              type="button"
-              class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              :disabled="!newSourceName.trim() || !newSourceUrl.trim()"
-              @click="addNewSource"
-            >
-              {{ $t('pluginStore.add_source') }}
-            </button>
+          <div v-else class="text-center py-4 text-sm text-theme-faint">
+            {{ $t('pluginStore.no_sources') }}
+          </div>
+
+          <!-- Add New Source Form -->
+          <div class="border-t border-divider pt-4">
+            <div class="mb-3">
+              <label class="block text-sm font-medium text-theme-body mb-1">{{ $t('pluginStore.source_name') }}</label>
+              <UiInput
+                v-model="newSourceName"
+                type="text"
+                :placeholder="$t('pluginStore.source_name_placeholder')"
+                class="w-full rounded-lg px-3 py-2 transition-colors"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="block text-sm font-medium text-theme-body mb-1">{{ $t('pluginStore.source_url') }}</label>
+              <UiInput
+                v-model="newSourceUrl"
+                type="text"
+                :placeholder="$t('pluginStore.source_url_placeholder')"
+                class="w-full rounded-lg px-3 py-2 transition-colors"
+              />
+            </div>
           </div>
         </div>
+        <template #footer>
+          <UiButton variant="secondary" @click="sourceManageVisible = false">
+            {{ $t('pluginStore.cancel') }}
+          </UiButton>
+          <UiButton :disabled="!newSourceName.trim() || !newSourceUrl.trim()" @click="addNewSource">
+            {{ $t('pluginStore.add_source') }}
+          </UiButton>
+        </template>
       </Modal>
     </div>
 
@@ -755,14 +738,8 @@
     </Modal>
 
     <!-- Install Plugin Dialog -->
-    <Modal v-model="installDialogVisible" content-class="max-w-md">
-      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.install_add') }}</h3>
-          <button type="button" class="text-theme-faint text-theme-faint-hover" @click="installDialogVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
-        </div>
+    <Modal v-model="installDialogVisible" content-class="max-w-md" :title="$t('plugin.install_add')">
+      <template #subheader>
         <div class="flex border-b border-divider px-6">
           <button
             type="button"
@@ -781,82 +758,19 @@
             {{ $t('plugin.upload_zip') }}
           </button>
         </div>
-        <div class="px-6 py-5 flex-1 overflow-y-auto">
-          <div v-show="installTab === 'github'">
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.repo_url') }}</label>
-              <UiInput
-                v-model="installForm.repo_url"
-                type="text"
-                placeholder="https://github.com/owner/repo"
-                class="w-full rounded-lg px-3 py-2 transition-colors"
-              />
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-theme-body mb-2">
-                <span>{{ $t('plugin.install_gh_proxy_label') }}</span>
-                <span class="text-xs font-normal text-theme-faint ml-1">{{ $t('plugin.install_optional') }}</span>
-              </label>
-              <CustomSelect
-                v-model="proxyStrategy"
-                :options="proxyStrategyOptions"
-                :placeholder="$t('plugin.proxy_strategy_auto')"
-              />
-            </div>
-            <div v-if="proxyStrategy === 'specific'" class="mt-3">
-              <CustomSelect
-                v-model="selectedProxyUrl"
-                :options="proxySelectOptions"
-                :placeholder="$t('plugin.proxy_select_placeholder')"
-              />
-            </div>
-          </div>
-          <div v-show="installTab === 'upload'">
-            <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.install_upload_label') }}</label>
-            <FileDropzone
-              ref="installDropzoneRef"
-              v-model="uploadFile"
-              accept=".zip"
-              :title-fallback="$t('plugin.upload_hint')"
-              :reselect-fallback="$t('plugin.upload_hint')"
+      </template>
+      <div class="px-6 py-5 flex-1 overflow-y-auto">
+        <div v-show="installTab === 'github'">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.repo_url') }}</label>
+            <UiInput
+              v-model="installForm.repo_url"
+              type="text"
+              placeholder="https://github.com/owner/repo"
+              class="w-full rounded-lg px-3 py-2 transition-colors"
             />
           </div>
-        </div>
-        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
-          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="installDialogVisible = false">{{ $t('plugin.cancel') }}</button>
-          <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="installing" @click="handleInstall">{{ $t('plugin.install') }}</button>
-        </div>
-      </div>
-    </Modal>
-
-    <!-- Update Plugin Dialog -->
-    <Modal v-model="updateDialogVisible" content-class="max-w-md">
-      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.update') }}</h3>
-          <button type="button" class="text-theme-faint text-theme-faint-hover" @click="updateDialogVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
-        </div>
-        <div class="px-6 py-5 flex-1 overflow-y-auto">
-          <p class="text-sm text-theme-supporting mb-4">
-            {{ selectedUpdateItems.length === 1 ? $t('plugin.update_confirm', { name: updateItemName(selectedUpdateItems[0]!) }) : $t('plugin.update_batch_confirm', { count: selectedUpdateItems.length }) }}
-          </p>
-          <ul class="mb-4 max-h-40 space-y-2 overflow-y-auto text-sm text-theme-body">
-            <li v-for="item in updateTargetItems" :key="item.plugin_id">
-              <label class="flex cursor-pointer items-start gap-2">
-                <input
-                  v-model="selectedUpdatePluginIds"
-                  type="checkbox"
-                  :value="item.plugin_id"
-                  :disabled="enqueueingUpdates"
-                  class="ui-checkbox mt-0.5"
-                />
-                <span class="min-w-0 break-words">{{ updateItemName(item) }}</span>
-              </label>
-            </li>
-          </ul>
-          <div class="mb-4">
+          <div>
             <label class="block text-sm font-medium text-theme-body mb-2">
               <span>{{ $t('plugin.install_gh_proxy_label') }}</span>
               <span class="text-xs font-normal text-theme-faint ml-1">{{ $t('plugin.install_optional') }}</span>
@@ -867,7 +781,7 @@
               :placeholder="$t('plugin.proxy_strategy_auto')"
             />
           </div>
-          <div v-if="proxyStrategy === 'specific'">
+          <div v-if="proxyStrategy === 'specific'" class="mt-3">
             <CustomSelect
               v-model="selectedProxyUrl"
               :options="proxySelectOptions"
@@ -875,11 +789,66 @@
             />
           </div>
         </div>
-        <div class="flex justify-end px-6 py-4 border-t border-divider">
-          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="updateDialogVisible = false">{{ $t('plugin.cancel') }}</button>
-          <button type="button" class="px-4 py-2 ml-2 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="enqueueingUpdates || !selectedUpdateItems.length" @click="confirmUpdate">{{ $t('plugin.update') }}</button>
+        <div v-show="installTab === 'upload'">
+          <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.install_upload_label') }}</label>
+          <FileDropzone
+            ref="installDropzoneRef"
+            v-model="uploadFile"
+            accept=".zip"
+            :title-fallback="$t('plugin.upload_hint')"
+            :reselect-fallback="$t('plugin.upload_hint')"
+          />
         </div>
       </div>
+      <template #footer>
+        <UiButton variant="secondary" @click="installDialogVisible = false">{{ $t('plugin.cancel') }}</UiButton>
+        <UiButton :disabled="installing" @click="handleInstall">{{ $t('plugin.install') }}</UiButton>
+      </template>
+    </Modal>
+
+    <!-- Update Plugin Dialog -->
+    <Modal v-model="updateDialogVisible" content-class="max-w-md" :title="$t('plugin.update')" footer-class="flex justify-end px-6 py-4 border-t border-divider">
+      <div class="px-6 py-5 flex-1 overflow-y-auto">
+        <p class="text-sm text-theme-supporting mb-4">
+          {{ selectedUpdateItems.length === 1 ? $t('plugin.update_confirm', { name: updateItemName(selectedUpdateItems[0]!) }) : $t('plugin.update_batch_confirm', { count: selectedUpdateItems.length }) }}
+        </p>
+        <ul class="mb-4 max-h-40 space-y-2 overflow-y-auto text-sm text-theme-body">
+          <li v-for="item in updateTargetItems" :key="item.plugin_id">
+            <label class="flex cursor-pointer items-start gap-2">
+              <input
+                v-model="selectedUpdatePluginIds"
+                type="checkbox"
+                :value="item.plugin_id"
+                :disabled="enqueueingUpdates"
+                class="ui-checkbox mt-0.5"
+              />
+              <span class="min-w-0 break-words">{{ updateItemName(item) }}</span>
+            </label>
+          </li>
+        </ul>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-theme-body mb-2">
+            <span>{{ $t('plugin.install_gh_proxy_label') }}</span>
+            <span class="text-xs font-normal text-theme-faint ml-1">{{ $t('plugin.install_optional') }}</span>
+          </label>
+          <CustomSelect
+            v-model="proxyStrategy"
+            :options="proxyStrategyOptions"
+            :placeholder="$t('plugin.proxy_strategy_auto')"
+          />
+        </div>
+        <div v-if="proxyStrategy === 'specific'">
+          <CustomSelect
+            v-model="selectedProxyUrl"
+            :options="proxySelectOptions"
+            :placeholder="$t('plugin.proxy_select_placeholder')"
+          />
+        </div>
+      </div>
+      <template #footer>
+        <UiButton variant="secondary" @click="updateDialogVisible = false">{{ $t('plugin.cancel') }}</UiButton>
+        <UiButton variant="success" class="ml-2" :disabled="enqueueingUpdates || !selectedUpdateItems.length" @click="confirmUpdate">{{ $t('plugin.update') }}</UiButton>
+      </template>
     </Modal>
 
     <!-- Plugin Details Dialog -->
@@ -976,140 +945,120 @@
       </div>
     </Modal>
 
-    <Modal v-model="pluginConfigVisible" content-class="max-w-md">
-      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <div>
-            <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.config_modal_title') }}</h3>
-            <p class="mt-1 text-sm text-theme-subtle">{{ configPluginName }}</p>
-          </div>
-          <button type="button" class="text-theme-faint text-theme-faint-hover" @click="pluginConfigVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
+    <Modal
+      v-model="pluginConfigVisible"
+      content-class="max-w-md"
+      :title="$t('plugin.config_modal_title')"
+      :description="configPluginName"
+    >
+      <div class="px-6 py-4 flex-1 overflow-y-auto">
+        <div v-if="configLoading" class="flex justify-center items-center py-12">
+          <IconSpinner class="animate-spin h-6 w-6 text-status-info dark:text-blue-400" />
         </div>
-        <div class="px-6 py-4 flex-1 overflow-y-auto">
-          <div v-if="configLoading" class="flex justify-center items-center py-12">
-            <IconSpinner class="animate-spin h-6 w-6 text-status-info dark:text-blue-400" />
-          </div>
-          <div v-else-if="hasPluginConfigFields">
-            <ConfigForm ref="configFormRef" v-model="pluginConfigValues" :schema="pluginConfigSchema" />
-          </div>
-          <div v-else class="text-center py-8 text-theme-faint">
-            <CircleCheck class="mx-auto mb-3 h-10 w-10" />
-            <p>{{ $t('plugin.no_config') }}</p>
-          </div>
+        <div v-else-if="hasPluginConfigFields">
+          <ConfigForm ref="configFormRef" v-model="pluginConfigValues" :schema="pluginConfigSchema" />
         </div>
-        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
-          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="pluginConfigVisible = false">{{ $t('plugin.cancel') }}</button>
-          <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="!hasPluginConfigFields || savingConfig" @click="savePluginConfig">{{ $t('plugin.save') }}</button>
+        <div v-else class="text-center py-8 text-theme-faint">
+          <CircleCheck class="mx-auto mb-3 h-10 w-10" />
+          <p>{{ $t('plugin.no_config') }}</p>
         </div>
       </div>
+      <template #footer>
+        <UiButton variant="secondary" @click="pluginConfigVisible = false">{{ $t('plugin.cancel') }}</UiButton>
+        <UiButton :disabled="!hasPluginConfigFields || savingConfig" @click="savePluginConfig">{{ $t('plugin.save') }}</UiButton>
+      </template>
     </Modal>
 
     <SkillDetails v-model="skillDetailsVisible" :skill="selectedSkill" @saved="loadSkills" />
 
     <!-- Skills Upload Dialog -->
-    <Modal v-model="skillsUploadVisible" content-class="max-w-md">
-      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.skills_upload') }}</h3>
-          <button type="button" class="text-theme-faint text-theme-faint-hover" @click="skillsUploadVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
-        </div>
-        <div class="px-6 py-5 flex-1 overflow-y-auto">
-          <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.skills_upload_label') }}</label>
-          <FileDropzone
-            ref="skillsDropzoneRef"
-            v-model="skillUploadFile"
-            accept=".zip"
-            :title-fallback="$t('plugin.upload_hint')"
-            :reselect-fallback="$t('plugin.upload_hint')"
-          />
-        </div>
-        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
-          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="skillsUploadVisible = false">{{ $t('plugin.cancel') }}</button>
-          <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="uploadingSkill" @click="handleSkillUpload">{{ $t('plugin.skills_upload_btn') }}</button>
-        </div>
+    <Modal v-model="skillsUploadVisible" content-class="max-w-md" :title="$t('plugin.skills_upload')">
+      <div class="px-6 py-5 flex-1 overflow-y-auto">
+        <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.skills_upload_label') }}</label>
+        <FileDropzone
+          ref="skillsDropzoneRef"
+          v-model="skillUploadFile"
+          accept=".zip"
+          :title-fallback="$t('plugin.upload_hint')"
+          :reselect-fallback="$t('plugin.upload_hint')"
+        />
       </div>
+      <template #footer>
+        <UiButton variant="secondary" @click="skillsUploadVisible = false">{{ $t('plugin.cancel') }}</UiButton>
+        <UiButton :disabled="uploadingSkill" @click="handleSkillUpload">{{ $t('plugin.skills_upload_btn') }}</UiButton>
+      </template>
     </Modal>
 
     <!-- MCP Config Dialog -->
-    <Modal v-model="mcpDialogVisible" content-class="max-w-4xl">
-      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 95vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">{{ mcpEditMode ? $t('plugin.mcp_edit') : $t('plugin.mcp_add') }}</h3>
-          <button type="button" class="text-theme-faint text-theme-faint-hover" @click="mcpDialogVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
+    <Modal
+      v-model="mcpDialogVisible"
+      content-class="max-w-4xl"
+      max-height="95vh"
+      :title="mcpEditMode ? $t('plugin.mcp_edit') : $t('plugin.mcp_add')"
+    >
+      <div class="px-6 py-4 flex-1 overflow-y-auto space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.mcp_name') }}</label>
+          <UiInput
+            v-model="mcpForm.name"
+            type="text"
+            class="w-full rounded-lg px-3 py-2 transition-colors"
+          />
         </div>
-        <div class="px-6 py-4 flex-1 overflow-y-auto space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.mcp_name') }}</label>
-            <UiInput
-              v-model="mcpForm.name"
-              type="text"
-              class="w-full rounded-lg px-3 py-2 transition-colors"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.mcp_description') }}</label>
-            <UiTextarea
-              v-model="mcpForm.description"
-              rows="2"
-              class="w-full rounded-lg px-3 py-2 transition-colors resize-none"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.mcp_template') }}</label>
-            <CustomSelect
-              :model-value="mcpTemplate"
-              :options="mcpTemplateOptions"
-              @update:model-value="onMcpTemplateChange"
-            />
-            <p class="mt-1 text-xs text-theme-faint">{{ $t('plugin.mcp_template_hint') }}</p>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.mcp_config') }}</label>
-            <MonacoEditor v-model="mcpConfigJson" language="json" height="300px" />
-          </div>
+        <div>
+          <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.mcp_description') }}</label>
+          <UiTextarea
+            v-model="mcpForm.description"
+            rows="2"
+            class="w-full rounded-lg px-3 py-2 transition-colors resize-none"
+          />
         </div>
-        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
-          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="mcpDialogVisible = false">{{ $t('plugin.cancel') }}</button>
-          <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="savingMcp" @click="saveMcpForm">{{ $t('plugin.save') }}</button>
+        <div>
+          <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.mcp_template') }}</label>
+          <CustomSelect
+            :model-value="mcpTemplate"
+            :options="mcpTemplateOptions"
+            @update:model-value="onMcpTemplateChange"
+          />
+          <p class="mt-1 text-xs text-theme-faint">{{ $t('plugin.mcp_template_hint') }}</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('plugin.mcp_config') }}</label>
+          <MonacoEditor v-model="mcpConfigJson" language="json" height="300px" />
         </div>
       </div>
+      <template #footer>
+        <UiButton variant="secondary" @click="mcpDialogVisible = false">{{ $t('plugin.cancel') }}</UiButton>
+        <UiButton :disabled="savingMcp" @click="saveMcpForm">{{ $t('plugin.save') }}</UiButton>
+      </template>
     </Modal>
 
     <!-- MCP Tools Dialog -->
-    <Modal v-model="mcpToolsDialogVisible" content-class="max-w-2xl">
-      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 80vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.mcp_tools_title', { name: selectedMcpServer?.name || selectedMcpServer?.id || '' }) }}</h3>
-          <button type="button" class="text-theme-faint text-theme-faint-hover" @click="mcpToolsDialogVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
+    <Modal
+      v-model="mcpToolsDialogVisible"
+      content-class="max-w-2xl"
+      max-height="80vh"
+      :title="$t('plugin.mcp_tools_title', { name: selectedMcpServer?.name || selectedMcpServer?.id || '' })"
+    >
+      <div class="px-6 py-4 flex-1 overflow-y-auto">
+        <div v-if="mcpToolsLoading" class="flex justify-center py-8">
+          <IconSpinner class="w-6 h-6 animate-spin text-theme-faint" />
         </div>
-        <div class="px-6 py-4 flex-1 overflow-y-auto">
-          <div v-if="mcpToolsLoading" class="flex justify-center py-8">
-            <IconSpinner class="w-6 h-6 animate-spin text-theme-faint" />
-          </div>
-          <p v-else-if="mcpToolsError" class="text-sm text-red-500">{{ mcpToolsError }}</p>
-          <p v-else-if="mcpTools.length === 0" class="py-4 text-center text-sm text-theme-subtle">{{ $t('plugin.mcp_tools_empty') }}</p>
-          <div v-else class="space-y-3">
-            <p class="text-xs text-theme-faint">{{ $t('plugin.mcp_tool_toggle_hint') }}</p>
-            <div v-for="tool in mcpTools" :key="tool.name" class="rounded-lg border border-divider p-3">
-              <div class="flex items-start justify-between gap-3">
-                <div class="min-w-0">
-                  <code class="text-sm font-medium text-theme-high">{{ tool.name }}</code>
-                  <p v-if="tool.description" class="mt-1 text-sm text-theme-supporting whitespace-pre-wrap">{{ tool.description }}</p>
-                </div>
-                <ToggleSwitch
-                  :model-value="tool.enabled"
-                  :aria-label="$t('plugin.mcp_tool_toggle_label', { name: tool.name })"
-                  @update:model-value="toggleMcpToolItem(tool)"
-                />
+        <p v-else-if="mcpToolsError" class="text-sm text-red-500">{{ mcpToolsError }}</p>
+        <p v-else-if="mcpTools.length === 0" class="py-4 text-center text-sm text-theme-subtle">{{ $t('plugin.mcp_tools_empty') }}</p>
+        <div v-else class="space-y-3">
+          <p class="text-xs text-theme-faint">{{ $t('plugin.mcp_tool_toggle_hint') }}</p>
+          <div v-for="tool in mcpTools" :key="tool.name" class="rounded-lg border border-divider p-3">
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <code class="text-sm font-medium text-theme-high">{{ tool.name }}</code>
+                <p v-if="tool.description" class="mt-1 text-sm text-theme-supporting whitespace-pre-wrap">{{ tool.description }}</p>
               </div>
+              <ToggleSwitch
+                :model-value="tool.enabled"
+                :aria-label="$t('plugin.mcp_tool_toggle_label', { name: tool.name })"
+                @update:model-value="toggleMcpToolItem(tool)"
+              />
             </div>
           </div>
         </div>
@@ -1158,6 +1107,7 @@ import { fetchStoreReadme, getStoreReadmeRef } from '@/utils/pluginReadme'
 import PluginComponents from '@/components/common/PluginComponents.vue'
 import UiInput from '@/components/ui/UiInput.vue'
 import UiTextarea from '@/components/ui/UiTextarea.vue'
+import UiButton from '@/components/ui/UiButton.vue'
 
 import {
   getPlugins, getPluginConfig, getPluginReadme, getPluginComponents, updatePluginConfig,

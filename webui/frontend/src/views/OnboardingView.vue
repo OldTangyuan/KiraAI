@@ -63,16 +63,13 @@
       </div>
     </div>
 
-    <Modal v-model="configurationModalVisible" content-class="max-w-6xl" content-style="max-height: 90vh">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex items-center justify-between px-6 py-4 border-b border-divider">
-          <h2 class="text-lg font-semibold text-theme-strong">{{ selectedConfigurationTitle }}</h2>
-          <button type="button" class="text-theme-faint text-theme-faint-hover" :aria-label="t('onboarding.close_configuration')" @click="configurationModalVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
-        </div>
-        <div class="flex-1 overflow-y-auto p-6"><component :is="selectedConfigurationComponent" v-if="selectedConfigurationComponent" :initial-tab="selectedConfiguration === 'models' ? 'models' : undefined" /></div>
-      </div>
+    <Modal
+      v-model="configurationModalVisible"
+      content-class="max-w-6xl"
+      :title="selectedConfigurationTitle"
+      :close-label="t('onboarding.close_configuration')"
+    >
+      <div class="flex-1 overflow-y-auto p-6"><component :is="selectedConfigurationComponent" v-if="selectedConfigurationComponent" :initial-tab="selectedConfiguration === 'models' ? 'models' : undefined" /></div>
     </Modal>
   </div>
 </template>
@@ -91,7 +88,7 @@ import ProviderView from '@/views/ProviderView.vue'
 import AdapterView from '@/views/AdapterView.vue'
 import ConfigView from '@/views/ConfigView.vue'
 import PersonaView from '@/views/PersonaView.vue'
-import { IconClose, IconInfo, IconLightning, IconMoon, IconSpinner, IconSun } from '@/components/icons'
+import { IconInfo, IconLightning, IconMoon, IconSpinner, IconSun } from '@/components/icons'
 import { useAppStore } from '@/stores/app'
 
 const { t } = useI18n()

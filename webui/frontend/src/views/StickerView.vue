@@ -74,81 +74,68 @@
     </div>
 
     <!-- Create/Edit Modal -->
-    <Modal v-model="dialogVisible" content-class="max-w-md">
-      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">
-            {{ editMode ? $t('sticker.modal_title_edit') : $t('sticker.modal_title_add') }}
-          </h3>
-          <button class="text-theme-faint text-theme-faint-hover" @click="dialogVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
+    <Modal
+      v-model="dialogVisible"
+      content-class="max-w-md"
+      :title="editMode ? $t('sticker.modal_title_edit') : $t('sticker.modal_title_add')"
+    >
+      <div class="px-6 py-4 flex-1 overflow-y-auto">
+        <!-- File (add only) -->
+        <div v-if="!editMode" class="mb-4">
+          <label class="block text-sm font-medium text-theme-body mb-2">
+            {{ $t('sticker.file') }}
+          </label>
+          <ImageDropzone
+            v-model="form.file"
+            :title-text="$t('dropzone.title')"
+            :subtitle-text="$t('dropzone.subtitle')"
+            :selected-prefix="$t('dropzone.selected_prefix')"
+            :selected-hint="$t('dropzone.selected_hint')"
+          />
         </div>
-        <div class="px-6 py-4 flex-1 overflow-y-auto">
-          <!-- File (add only) -->
-          <div v-if="!editMode" class="mb-4">
-            <label class="block text-sm font-medium text-theme-body mb-2">
-              {{ $t('sticker.file') }}
-            </label>
-            <ImageDropzone
-              v-model="form.file"
-              :title-text="$t('dropzone.title')"
-              :subtitle-text="$t('dropzone.subtitle')"
-              :selected-prefix="$t('dropzone.selected_prefix')"
-              :selected-hint="$t('dropzone.selected_hint')"
-            />
-          </div>
-          <!-- ID (add editable / edit read-only) -->
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-theme-body mb-2">
-              ID
-              <span v-if="!editMode" class="text-xs font-normal text-theme-faint ml-1">{{ $t('sticker.optional') }}</span>
-            </label>
-            <UiInput
-              v-if="!editMode"
-              v-model="form.id"
-              type="text"
-              class="w-full rounded-lg px-3 py-2 transition-colors"
-              :placeholder="$t('sticker.id_placeholder')"
-            />
-            <UiInput
-              v-else
-              :model-value="form.id"
-              type="text"
-              disabled
-              class="w-full rounded-lg px-3 py-2"
-            />
-          </div>
-          <!-- Description -->
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-theme-body mb-2">
-              {{ $t('sticker.description') }}
-              <span v-if="!editMode" class="text-xs font-normal text-theme-faint ml-1">{{ $t('sticker.optional') }}</span>
-            </label>
-            <UiTextarea
-              v-model="form.desc"
-              rows="4"
-              class="w-full rounded-lg px-3 py-2 transition-colors"
-              :placeholder="editMode ? $t('sticker.description') : $t('sticker.desc_placeholder')"
-            />
-          </div>
+        <!-- ID (add editable / edit read-only) -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-theme-body mb-2">
+            ID
+            <span v-if="!editMode" class="text-xs font-normal text-theme-faint ml-1">{{ $t('sticker.optional') }}</span>
+          </label>
+          <UiInput
+            v-if="!editMode"
+            v-model="form.id"
+            type="text"
+            class="w-full rounded-lg px-3 py-2 transition-colors"
+            :placeholder="$t('sticker.id_placeholder')"
+          />
+          <UiInput
+            v-else
+            :model-value="form.id"
+            type="text"
+            disabled
+            class="w-full rounded-lg px-3 py-2"
+          />
         </div>
-        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
-          <button
-            class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            @click="dialogVisible = false"
-          >
-            {{ $t('sticker.modal_cancel') }}
-          </button>
-          <button
-            class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50"
-            :disabled="saving"
-            @click="handleSave"
-          >
-            {{ $t('sticker.modal_save') }}
-          </button>
+        <!-- Description -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-theme-body mb-2">
+            {{ $t('sticker.description') }}
+            <span v-if="!editMode" class="text-xs font-normal text-theme-faint ml-1">{{ $t('sticker.optional') }}</span>
+          </label>
+          <UiTextarea
+            v-model="form.desc"
+            rows="4"
+            class="w-full rounded-lg px-3 py-2 transition-colors"
+            :placeholder="editMode ? $t('sticker.description') : $t('sticker.desc_placeholder')"
+          />
         </div>
       </div>
+      <template #footer>
+        <UiButton variant="secondary" @click="dialogVisible = false">
+          {{ $t('sticker.modal_cancel') }}
+        </UiButton>
+        <UiButton :disabled="saving" @click="handleSave">
+          {{ $t('sticker.modal_save') }}
+        </UiButton>
+      </template>
     </Modal>
 
     <ConfirmModal
@@ -177,7 +164,8 @@ import ConfirmModal from '@/components/common/ConfirmModal.vue'
 import ImageDropzone from '@/components/common/ImageDropzone.vue'
 import UiInput from '@/components/ui/UiInput.vue'
 import UiTextarea from '@/components/ui/UiTextarea.vue'
-import { IconPlus, IconWarning, IconImage, IconClose } from '@/components/icons'
+import UiButton from '@/components/ui/UiButton.vue'
+import { IconPlus, IconWarning, IconImage } from '@/components/icons'
 import type { StickerItem } from '@/types'
 
 const { t } = useI18n()

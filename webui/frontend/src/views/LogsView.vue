@@ -86,35 +86,27 @@
     </div>
 
     <!-- Install dependencies modal -->
-    <Modal v-model="showInstallPanel" content-class="max-w-md">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">{{ $t('logs.install_deps') }}</h3>
-          <button type="button" class="text-theme-faint text-theme-faint-hover" @click="showInstallPanel = false">
-            <IconClose class="w-6 h-6" />
-          </button>
-        </div>
-        <div class="px-6 py-5 flex-1 overflow-y-auto">
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('logs.install_packages_label') }}</label>
-            <UiTextarea
-              v-model="installPackagesInput"
-              :placeholder="$t('logs.install_packages_placeholder')"
-              class="w-full rounded-lg px-3 py-2 font-mono text-sm resize-none transition-colors"
-              rows="3"
-              @keydown.ctrl.enter="handleInstall"
-            />
-          </div>
-        </div>
-        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
-          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="showInstallPanel = false">{{ $t('logs.install_close') }}</button>
-          <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center" :disabled="isInstalling" @click="handleInstall">
-            <IconSpinner v-if="isInstalling" class="w-5 h-5 mr-2 animate-spin" />
-            <IconPackage v-else class="w-5 h-5 mr-2" />
-            <span>{{ isInstalling ? $t('logs.install_installing') : $t('logs.install_btn') }}</span>
-          </button>
+    <Modal v-model="showInstallPanel" content-class="max-w-md" :title="$t('logs.install_deps')">
+      <div class="px-6 py-5 flex-1 overflow-y-auto">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-theme-body mb-2">{{ $t('logs.install_packages_label') }}</label>
+          <UiTextarea
+            v-model="installPackagesInput"
+            :placeholder="$t('logs.install_packages_placeholder')"
+            class="w-full rounded-lg px-3 py-2 font-mono text-sm resize-none transition-colors"
+            rows="3"
+            @keydown.ctrl.enter="handleInstall"
+          />
         </div>
       </div>
+      <template #footer>
+        <UiButton variant="secondary" @click="showInstallPanel = false">{{ $t('logs.install_close') }}</UiButton>
+        <UiButton :disabled="isInstalling" class="flex items-center" @click="handleInstall">
+          <IconSpinner v-if="isInstalling" class="w-5 h-5 mr-2 animate-spin" />
+          <IconPackage v-else class="w-5 h-5 mr-2" />
+          <span>{{ isInstalling ? $t('logs.install_installing') : $t('logs.install_btn') }}</span>
+        </UiButton>
+      </template>
     </Modal>
 
     <!-- Log container -->
@@ -169,9 +161,10 @@ import { useSSE } from '@/composables/useSSE'
 import { getLogHistory, getLogConfig, installPackages } from '@/api/logs'
 import CustomMultiSelect from '@/components/common/CustomMultiSelect.vue'
 import { notify } from '@/composables/useNotification'
-import { IconTrash, IconRefresh, IconDownload, IconPackage, IconSpinner, IconClose } from '@/components/icons'
+import { IconTrash, IconRefresh, IconDownload, IconPackage, IconSpinner } from '@/components/icons'
 import Modal from '@/components/common/Modal.vue'
 import UiTextarea from '@/components/ui/UiTextarea.vue'
+import UiButton from '@/components/ui/UiButton.vue'
 import type { LogEntry } from '@/types'
 
 // A stable, monotonically increasing id per row. Using the array index as the

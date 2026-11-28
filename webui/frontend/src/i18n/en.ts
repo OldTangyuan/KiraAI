@@ -2,6 +2,7 @@ export default {
   common: {
     code_plain_text: 'text',
     cancel: 'Cancel',
+    close: 'Close',
     on: 'On',
     off: 'Off',
     delete: 'Delete',

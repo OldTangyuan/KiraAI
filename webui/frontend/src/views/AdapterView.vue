@@ -80,123 +80,110 @@
     </div>
 
     <!-- Create/Edit Modal -->
-    <Modal v-model="dialogVisible" content-class="max-w-md">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
-          <h3 class="text-lg font-semibold text-theme-strong">
-            {{ editMode ? $t('adapter.edit_title') : $t('adapter.add') }}
-          </h3>
-          <button class="text-theme-faint text-theme-faint-hover" @click="dialogVisible = false">
-            <IconClose class="w-6 h-6" />
-          </button>
+    <Modal
+      v-model="dialogVisible"
+      content-class="max-w-md"
+      :title="editMode ? $t('adapter.edit_title') : $t('adapter.add')"
+    >
+      <div class="px-6 py-4 flex-1 overflow-y-auto">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-theme-body mb-2">
+            {{ $t('adapter.modal_name_label') }}
+          </label>
+          <UiInput
+            v-model="form.name"
+            type="text"
+            class="w-full rounded-lg px-3 py-2 transition-colors"
+            :placeholder="$t('adapter.name')"
+          />
         </div>
-        <div class="px-6 py-4 flex-1 overflow-y-auto">
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-theme-body mb-2">
-              {{ $t('adapter.modal_name_label') }}
-            </label>
-            <UiInput
-              v-model="form.name"
-              type="text"
-              class="w-full rounded-lg px-3 py-2 transition-colors"
-              :placeholder="$t('adapter.name')"
-            />
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-theme-body mb-2">
+            {{ $t('adapter.modal_platform_label') }}
+          </label>
+          <CustomSelect
+            v-model="form.platform"
+            :options="platformOptions"
+            :placeholder="$t('adapter.platform_placeholder') || 'Select adapter platform...'"
+            :disabled="editMode"
+            @update:model-value="onPlatformChange"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-theme-body mb-2">
+            {{ $t('adapter.modal_desc_label') }}
+          </label>
+          <UiTextarea
+            v-model="form.description"
+            rows="2"
+            class="w-full rounded-lg px-3 py-2 transition-colors resize-none"
+            :placeholder="$t('adapter.modal_desc_placeholder')"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-theme-body mb-2">
+            {{ $t('adapter.modal_status_label') }}
+          </label>
+          <div class="flex items-center">
+            <ToggleSwitch v-model="formActive" show-state :aria-label="$t('adapter.modal_status_label')" />
           </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-theme-body mb-2">
-              {{ $t('adapter.modal_platform_label') }}
-            </label>
-            <CustomSelect
-              v-model="form.platform"
-              :options="platformOptions"
-              :placeholder="$t('adapter.platform_placeholder') || 'Select adapter platform...'"
-              :disabled="editMode"
-              @update:model-value="onPlatformChange"
-            />
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-theme-body mb-2">
-              {{ $t('adapter.modal_desc_label') }}
-            </label>
-            <UiTextarea
-              v-model="form.description"
-              rows="2"
-              class="w-full rounded-lg px-3 py-2 transition-colors resize-none"
-              :placeholder="$t('adapter.modal_desc_placeholder')"
-            />
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-theme-body mb-2">
-              {{ $t('adapter.modal_status_label') }}
-            </label>
-            <div class="flex items-center">
-              <ToggleSwitch v-model="formActive" show-state :aria-label="$t('adapter.modal_status_label')" />
+        </div>
+        <div v-if="adapterSchema">
+          <div
+            v-if="supportsQRCodeLogin"
+            class="mb-4 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/30"
+          >
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <h4 class="text-sm font-semibold text-theme-strong">{{ $t('adapter.qrcode_login') }}</h4>
+                <p class="mt-1 text-xs text-theme-subtle">{{ $t('adapter.qrcode_login_hint') }}</p>
+              </div>
+              <button
+                v-if="['idle', 'expired', 'denied', 'error'].includes(qrLoginStatus)"
+                type="button"
+                class="shrink-0 rounded-md bg-blue-600 px-3 py-1.5 text-sm text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
+                :disabled="qrLoginLoading"
+                @click="startQRCodeLogin"
+              >
+                {{ qrLoginStatus === 'idle' ? $t('adapter.qrcode_start') : $t('adapter.qrcode_retry') }}
+              </button>
             </div>
-          </div>
-          <div v-if="adapterSchema">
-            <div
-              v-if="supportsQRCodeLogin"
-              class="mb-4 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/30"
-            >
-              <div class="flex items-center justify-between gap-3">
-                <div>
-                  <h4 class="text-sm font-semibold text-theme-strong">{{ $t('adapter.qrcode_login') }}</h4>
-                  <p class="mt-1 text-xs text-theme-subtle">{{ $t('adapter.qrcode_login_hint') }}</p>
-                </div>
-                <button
-                  v-if="['idle', 'expired', 'denied', 'error'].includes(qrLoginStatus)"
-                  type="button"
-                  class="shrink-0 rounded-md bg-blue-600 px-3 py-1.5 text-sm text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
-                  :disabled="qrLoginLoading"
-                  @click="startQRCodeLogin"
-                >
-                  {{ qrLoginStatus === 'idle' ? $t('adapter.qrcode_start') : $t('adapter.qrcode_retry') }}
-                </button>
-              </div>
 
-              <div v-if="qrLoginStatus === 'starting'" class="mt-4 flex items-center justify-center gap-2 py-6 text-sm text-theme-subtle">
-                <span class="h-4 w-4 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></span>
-                {{ $t('adapter.qrcode_starting') }}
-              </div>
+            <div v-if="qrLoginStatus === 'starting'" class="mt-4 flex items-center justify-center gap-2 py-6 text-sm text-theme-subtle">
+              <span class="h-4 w-4 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></span>
+              {{ $t('adapter.qrcode_starting') }}
+            </div>
 
-              <div v-else-if="qrLoginImage" class="mt-4 flex flex-col items-center">
-                <img
-                  :src="qrLoginImage"
-                  :alt="$t('adapter.qrcode_login')"
-                  class="h-52 w-52 rounded-lg bg-white p-2"
-                />
-                <p
-                  class="mt-2 text-center text-sm"
-                  :class="qrLoginStatus === 'confirmed' ? 'text-status-success dark:text-green-400' : 'text-theme-subtle'"
-                >
-                  {{ qrLoginStatusText }}
-                </p>
-              </div>
-
-              <p v-if="qrLoginMessage && qrLoginStatus !== 'confirmed'" class="mt-2 text-xs text-status-danger dark:text-red-400">
-                {{ te(qrLoginMessage) ? t(qrLoginMessage) : qrLoginMessage }}
+            <div v-else-if="qrLoginImage" class="mt-4 flex flex-col items-center">
+              <img
+                :src="qrLoginImage"
+                :alt="$t('adapter.qrcode_login')"
+                class="h-52 w-52 rounded-lg bg-white p-2"
+              />
+              <p
+                class="mt-2 text-center text-sm"
+                :class="qrLoginStatus === 'confirmed' ? 'text-status-success dark:text-green-400' : 'text-theme-subtle'"
+              >
+                {{ qrLoginStatusText }}
               </p>
             </div>
-            <h4 class="text-sm font-semibold text-theme-body mb-2">{{ $t('adapter.config') }}</h4>
-            <ConfigForm ref="configFormRef" v-model="form.config" :schema="adapterSchema" />
+
+            <p v-if="qrLoginMessage && qrLoginStatus !== 'confirmed'" class="mt-2 text-xs text-status-danger dark:text-red-400">
+              {{ te(qrLoginMessage) ? t(qrLoginMessage) : qrLoginMessage }}
+            </p>
           </div>
-        </div>
-        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
-          <button
-            class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            @click="dialogVisible = false"
-          >
-            {{ $t('adapter.modal_cancel') }}
-          </button>
-          <button
-            class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50"
-            :disabled="saving"
-            @click="handleSave"
-          >
-            {{ $t('adapter.modal_save') }}
-          </button>
+          <h4 class="text-sm font-semibold text-theme-body mb-2">{{ $t('adapter.config') }}</h4>
+          <ConfigForm ref="configFormRef" v-model="form.config" :schema="adapterSchema" />
         </div>
       </div>
+      <template #footer>
+        <UiButton variant="secondary" @click="dialogVisible = false">
+          {{ $t('adapter.modal_cancel') }}
+        </UiButton>
+        <UiButton :disabled="saving" @click="handleSave">
+          {{ $t('adapter.modal_save') }}
+        </UiButton>
+      </template>
     </Modal>
 
     <ConfirmModal
@@ -228,7 +215,8 @@ import Modal from '@/components/common/Modal.vue'
 import ToggleSwitch from '@/components/common/ToggleSwitch.vue'
 import UiInput from '@/components/ui/UiInput.vue'
 import UiTextarea from '@/components/ui/UiTextarea.vue'
-import { IconPlus, IconTerminal, IconClose } from '@/components/icons'
+import UiButton from '@/components/ui/UiButton.vue'
+import { IconPlus, IconTerminal } from '@/components/icons'
 import type { AdapterPlatform, AdapterResponse, QRCodeLoginStatus } from '@/types'
 
 const { t, te } = useI18n()
