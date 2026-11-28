@@ -1,0 +1,180 @@
+/* Page shell layout: background, sidebar, navigation, header and list cards.
+   Imported from main.ts after main.css so these rules keep loading after the
+   Tailwind utilities, as they did when main.css still held them inline. */
+
+.provider-item {
+  transition-property: border-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* ==================== Page Background ==================== */
+.page-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background-color: var(--color-page);
+}
+
+#app {
+  position: relative;
+}
+
+/* ==================== Sidebar ==================== */
+.sidebar-gradient {
+  background: var(--color-sidebar);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid var(--color-sidebar-border);
+}
+
+.dark .sidebar-gradient h1 {
+  color: var(--color-sidebar-heading);
+}
+
+.dark .sidebar-gradient p {
+  color: var(--color-sidebar-copy);
+}
+
+/* ==================== Sidebar Overlay ==================== */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-overlay-scrim);
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.sidebar-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 1025px) {
+  .sidebar-overlay {
+    display: none;
+  }
+}
+
+/* ==================== Navigation ==================== */
+.nav-item {
+  color: var(--color-text-primary);
+  position: relative;
+  background-color: transparent;
+}
+
+.nav-item svg {
+  color: var(--color-text-primary);
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-item:hover {
+  background-color: var(--color-hover);
+}
+
+.nav-item.active {
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent-strong);
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.nav-item.active svg {
+  color: var(--color-accent-strong);
+}
+
+.nav-item.active:hover {
+  background-color: var(--color-accent-soft-hover);
+}
+
+/* Navigation dot indicator */
+.nav-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-accent-indicator);
+  display: block;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-item.active .nav-dot {
+  background-color: var(--color-accent-indicator-active);
+  width: 6px;
+  height: 6px;
+  box-shadow: var(--shadow-accent-indicator);
+}
+
+/* ==================== Modal Cards ==================== */
+.modal-card {
+  background-color: var(--color-surface);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Inputs inside modal cards should have solid backgrounds, not glass */
+.modal-card input:not([type="checkbox"], [type="radio"]),
+.modal-card select,
+.modal-card textarea {
+  background-color: var(--color-surface);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Keep form controls raised above the solid surface of dark modal cards. */
+.dark .modal-card input:not([type="checkbox"], [type="radio"]),
+.dark .modal-card select,
+.dark .modal-card textarea {
+  background-color: var(--color-surface-raised);
+}
+
+/* ==================== Glass Cards ==================== */
+.glass-card {
+  background-color: var(--color-surface-raised);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-card);
+}
+
+/* ==================== Header ==================== */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--color-header);
+  border-bottom: 1px solid var(--color-sidebar-border);
+}
+
+/* ==================== Session Card ==================== */
+.session-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.session-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-session-hover);
+}
+
+/* ==================== Provider Item ==================== */
+.dark .provider-item:hover {
+  background-color: var(--color-item-hover);
+}
+
+.provider-item-selected {
+  background-color: var(--color-item-selected);
+  border-color: var(--color-item-selected-border);
+}
+
+/* The selected color must beat the dark hover color. */
+.dark .provider-item.provider-item-selected {
+  background-color: var(--color-item-selected);
+  border-color: var(--color-item-selected-border);
+}

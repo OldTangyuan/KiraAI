@@ -171,10 +171,10 @@ function cancelEdit() {
   padding: 2px 6px;
   font-size: 12px;
   color: var(--color-text-primary);
-  background-color: var(--color-surface-raised) !important;
+  background-color: var(--color-surface-raised);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--color-control-border) !important;
+  border: 1px solid var(--color-control-border);
   border-radius: 4px;
   outline: none;
   min-width: 40px;
@@ -183,12 +183,12 @@ function cancelEdit() {
 .tag-input-edit:hover,
 .tag-input-edit:focus,
 .tag-input-edit:focus-visible {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-accent);
 }
 
 .tag-input-edit:focus,
 .tag-input-edit:focus-visible {
-  box-shadow: 0 0 0 2px var(--color-focus-ring) !important;
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
 }
 
 .tag-input-field {
@@ -196,12 +196,12 @@ function cancelEdit() {
   min-width: 80px;
   color: var(--color-text-primary);
   caret-color: var(--color-text-primary);
-  background-color: var(--color-surface-raised) !important;
+  background-color: var(--color-surface-raised);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid transparent !important;
-  outline: none !important;
-  box-shadow: none !important;
+  border: 1px solid transparent;
+  outline: none;
+  box-shadow: none;
   font-size: 14px;
   line-height: 1.4;
   padding: 0;
@@ -210,7 +210,7 @@ function cancelEdit() {
 
 .tag-input-field:focus,
 .tag-input-field:focus-visible {
-  border-color: var(--color-border-strong) !important;
+  border-color: var(--color-border-strong);
 }
 
 .tag-input-field::placeholder {
