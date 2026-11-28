@@ -24,7 +24,7 @@
       </div>
       <div class="px-6 pb-6 flex justify-end space-x-3">
         <button
-          class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           @click="onCancel"
         >
           {{ cancelText }}

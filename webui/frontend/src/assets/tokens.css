@@ -36,6 +36,10 @@
   --color-border-subtle: rgba(209, 213, 219, 0.5);
   --color-border-strong: rgba(156, 163, 175, 0.5);
   --color-overlay-border: rgba(255, 255, 255, 0.3);
+  /* Divider/control dark values preserve the previous 3:1 non-text contrast. */
+  --color-border-divider: #e5e7eb;
+  --color-border-divider-soft: #f3f4f6;
+  --color-border-control: #d1d5db;
 
   /* Chat surfaces derive from the theme accent instead of a fixed color palette. */
   --color-chat-surface: color-mix(in srgb, var(--color-surface) 94%, var(--color-text-strong));
@@ -139,6 +143,9 @@
   --color-border-subtle: rgba(75, 85, 99, 0.2);
   --color-border-strong: rgba(75, 85, 99, 0.3);
   --color-overlay-border: rgba(75, 85, 99, 0.3);
+  --color-border-divider: rgba(148, 163, 184, 0.24);
+  --color-border-divider-soft: rgba(148, 163, 184, 0.24);
+  --color-border-control: rgba(75, 85, 99, 0.4);
 
   --color-accent: #3b82f6;
   --color-accent-strong: #93c5fd;

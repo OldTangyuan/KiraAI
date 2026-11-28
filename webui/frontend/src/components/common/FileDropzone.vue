@@ -6,7 +6,7 @@
       ? 'border-green-400 dark:border-green-500 bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/30'
       : dragActive
         ? 'border-blue-400 dark:border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-        : 'border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'"
+        : 'border-control bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'"
     @click="onClick"
     @dragover.prevent="onDragOver"
     @dragleave.prevent="onDragLeave"

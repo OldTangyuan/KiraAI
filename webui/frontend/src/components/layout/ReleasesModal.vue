@@ -2,7 +2,7 @@
   <Modal v-model="show" content-class="max-w-2xl" :persistent="isUpdating">
     <div class="bg-white dark:bg-[#1a1a1e] rounded-xl shadow-xl overflow-hidden">
       <!-- Header -->
-      <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+      <div class="px-6 py-4 border-b border-divider flex items-center justify-between">
         <div class="flex items-center gap-3">
           <h3 class="text-lg font-semibold text-theme-strong">
             {{ t('header.releases_title') }}

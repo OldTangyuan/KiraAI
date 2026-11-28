@@ -1,7 +1,7 @@
 <template>
   <Modal :model-value="open" content-class="max-w-xl self-start mt-[10vh]" @update:model-value="onVisibleChange">
-    <div class="quick-nav text-theme-body bg-white dark:bg-[#1b1b1f] border border-gray-200 dark:border-gray-700">
-      <div class="quick-nav-search border-gray-200 dark:border-gray-700">
+    <div class="quick-nav text-theme-body bg-white dark:bg-[#1b1b1f] border border-divider">
+      <div class="quick-nav-search border-divider">
         <IconSearch class="w-4 h-4 shrink-0 opacity-70" aria-hidden="true" />
         <input
           ref="inputRef"
@@ -54,7 +54,7 @@
         {{ query.trim() ? t('quickNav.no_results', { query: query.trim() }) : t('quickNav.no_entries') }}
       </p>
 
-      <div class="quick-nav-footer border-gray-200 dark:border-gray-700" @mousedown.prevent>
+      <div class="quick-nav-footer border-divider" @mousedown.prevent>
         <span>{{ t('quickNav.results_count', { count: results.length }) }}</span>
         <span class="quick-nav-footer-hints">
           <kbd class="quick-nav-kbd">↑</kbd>

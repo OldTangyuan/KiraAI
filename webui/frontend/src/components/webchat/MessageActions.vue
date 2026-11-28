@@ -6,7 +6,7 @@
     <Teleport to="body">
       <Transition name="message-menu">
         <div v-if="opened" ref="menu" role="menu" :aria-label="t('webchat.message_actions')"
-          class="fixed z-[100] min-w-40 rounded-xl border border-gray-200 bg-white p-1.5 text-theme-body shadow-lg dark:border-gray-700 dark:bg-[#1b1b1f]"
+          class="fixed z-[100] min-w-40 rounded-xl border border-divider bg-white p-1.5 text-theme-body shadow-lg dark:bg-[#1b1b1f]"
           :style="{ left: `${position.x}px`, top: `${position.y}px` }"
           @contextmenu.prevent @keydown="onMenuKey" @focusout="onFocusOut">
           <button type="button" role="menuitem" class="action-item hover:bg-gray-100 active:bg-gray-200 focus-visible:bg-gray-100 dark:hover:bg-[#2b2b2e] dark:active:bg-[#3a3a3e] dark:focus-visible:bg-[#2b2b2e]" @click="copy">{{ t('webchat.copy') }}</button>

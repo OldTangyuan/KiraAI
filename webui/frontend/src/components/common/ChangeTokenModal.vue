@@ -1,7 +1,7 @@
 <template>
   <Modal v-model="visible" content-class="max-w-md">
     <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-      <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
         <div>
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('settings.token_title') }}</h3>
           <p class="mt-1 text-sm text-theme-subtle">{{ $t('settings.token_desc') }}</p>
@@ -42,8 +42,8 @@
           />
         </div>
       </div>
-      <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
-        <button type="button" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="visible = false">{{ $t('settings.backup_confirm_cancel') }}</button>
+      <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
+        <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="visible = false">{{ $t('settings.backup_confirm_cancel') }}</button>
         <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="tokenChanging" @click="tokenConfirmRef?.open()">{{ tokenChanging ? $t('settings.token_changing') : $t('settings.token_submit') }}</button>
       </div>
     </div>

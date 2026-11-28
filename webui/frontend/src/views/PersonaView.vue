@@ -46,7 +46,7 @@
         </div>
         <div class="flex justify-end space-x-3 mt-2">
           <button
-            class="px-3 py-1.5 text-xs font-medium rounded-md border border-gray-300 text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 transition-colors"
+            class="px-3 py-1.5 text-xs font-medium rounded-md border border-control text-theme-body hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
             @click="openEditDialog(persona)"
           >
             {{ $t('persona.edit') }}
@@ -78,7 +78,7 @@
     <!-- Creation Mode Modal -->
     <Modal v-model="createModeVisible" content-class="max-w-2xl" content-style="width: 90%;">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('persona.create_mode_title') }}</h3>
           <button class="text-theme-faint text-theme-faint-hover" @click="createModeVisible = false">
             <IconClose class="w-6 h-6" />
@@ -93,7 +93,7 @@
             <p class="mt-2 text-sm text-theme-supporting">{{ $t('persona.create_with_ai_hint') }}</p>
           </button>
           <button
-            class="text-left rounded-lg border border-gray-200 dark:border-gray-700 p-5 hover:border-blue-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            class="text-left rounded-lg border border-divider p-5 hover:border-blue-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
             @click="openManualCreateDialog"
           >
             <h4 class="font-semibold text-theme-high">{{ $t('persona.create_manually') }}</h4>
@@ -106,7 +106,7 @@
     <!-- AI Persona Interview Modal -->
     <Modal v-model="generatorVisible" content-class="max-w-2xl" content-style="width: 90%;">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 80vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('persona.create_with_ai') }}</h3>
           <button class="text-theme-faint text-theme-faint-hover" :disabled="generating" @click="generatorVisible = false">
             <IconClose class="w-6 h-6" />
@@ -144,7 +144,7 @@
             {{ $t('persona.generating') }}
           </div>
         </div>
-        <form class="px-6 py-4 border-t border-gray-200 dark:border-gray-700" @submit.prevent="handleGeneratorAnswer()">
+        <form class="px-6 py-4 border-t border-divider" @submit.prevent="handleGeneratorAnswer()">
           <label class="sr-only" for="persona-generator-answer">{{ $t('persona.generator_answer_label') }}</label>
           <UiTextarea
             id="persona-generator-answer"
@@ -166,7 +166,7 @@
             <div class="flex gap-3">
               <button
                 type="button"
-                class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
+                class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
                 :disabled="generating"
                 @click="generatorVisible = false"
               >
@@ -188,7 +188,7 @@
     <!-- Create/Edit Modal -->
     <Modal :model-value="dialogVisible" @update:model-value="setDialogVisible" :persistent="saving" content-class="max-w-4xl" content-style="width: 90%;">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">
             {{ editMode ? $t('persona.edit_title') : $t('persona.modal_title') }}
           </h3>
@@ -211,7 +211,7 @@
               <button
                 id="persona-reference-image"
                 type="button"
-                class="absolute inset-0 flex h-full w-full items-center justify-center overflow-hidden rounded-lg border border-dashed border-gray-300 bg-gray-50 transition-colors duration-300 hover:border-gray-400 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:!border-gray-500 dark:hover:bg-gray-700 disabled:opacity-50"
+                class="absolute inset-0 flex h-full w-full items-center justify-center overflow-hidden rounded-lg border border-dashed border-control bg-gray-50 transition-colors duration-300 hover:border-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:hover:!border-gray-500 dark:hover:bg-gray-700 disabled:opacity-50"
                 :aria-label="t('persona.select_reference_image')"
                 :disabled="saving || referenceImageLoading"
                 @click="referenceImageInput?.click()"
@@ -304,9 +304,9 @@
             </div>
           </CollapsibleSection>
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
           <button
-            class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             :disabled="saving" @click="setDialogVisible(false)"
           >
             {{ $t('persona.modal_cancel') }}

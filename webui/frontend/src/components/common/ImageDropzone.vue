@@ -71,7 +71,7 @@ const dropzoneClasses = computed(() => {
     return 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20'
   }
   // Default: gray dashed border, hover bg more obvious, border stays gray
-  return 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700'
+  return 'border-control hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700'
 })
 
 function onFileInputChange(e: Event) {

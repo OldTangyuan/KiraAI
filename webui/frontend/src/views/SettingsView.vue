@@ -6,7 +6,7 @@
     </div>
 
     <!-- Tabs -->
-    <div class="flex space-x-4 mb-6 border-b border-gray-200 dark:border-gray-700">
+    <div class="flex space-x-4 mb-6 border-b border-divider">
       <button
         v-for="tab in tabs"
         :key="tab.key"
@@ -40,7 +40,7 @@
         </div>
 
         <template v-else-if="storageInfo">
-          <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-5 mb-5">
+          <div class="rounded-xl border border-divider p-5 mb-5">
             <div class="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <h5 class="text-base font-semibold text-theme-strong">{{ $t('settings.storage_instance_usage') }}</h5>
@@ -70,7 +70,7 @@
           <p class="text-sm text-theme-subtle mb-4">{{ $t('settings.storage_cleanup_hint') }}</p>
           <div class="space-y-3 mb-5">
             <div v-for="category in storageInfo.categories" :key="category.id"
-              class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:items-center">
+              class="rounded-xl border border-divider p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:items-center">
               <div class="flex-1 min-w-0">
                 <h5 class="font-semibold text-theme-strong">{{ $t('settings.storage_category_' + category.id) }}</h5>
                 <p class="text-sm text-theme-subtle mt-1">{{ $t('settings.storage_description_' + category.id) }}</p>
@@ -90,7 +90,7 @@
               </button>
             </div>
           </div>
-          <details class="rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <details class="rounded-lg border border-divider p-4">
             <summary class="cursor-pointer text-sm font-semibold text-theme-body">{{ $t('settings.storage_details') }}</summary>
             <div class="mt-4 space-y-4">
               <!-- Data Path -->
@@ -143,14 +143,14 @@
                 </div>
                 <table v-else class="w-full text-sm">
                   <thead>
-                    <tr class="border-b border-gray-200 dark:border-gray-600">
+                    <tr class="border-b border-divider">
                       <th class="text-left py-2 text-theme-subtle font-medium">{{ $t('settings.storage_dir_name') }}</th>
                       <th class="text-right py-2 text-theme-subtle font-medium">{{ $t('settings.storage_dir_size') }}</th>
                       <th class="text-right py-2 text-theme-subtle font-medium">{{ $t('settings.storage_dir_files') }}</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="dir in storageInfo.directories" :key="dir.name" class="border-b border-gray-100 dark:border-gray-700 last:border-0">
+                    <tr v-for="dir in storageInfo.directories" :key="dir.name" class="border-b border-divider-soft last:border-0">
                       <td class="py-2 font-mono text-theme-strong">{{ dir.name }}</td>
                       <td class="py-2 text-right text-theme-supporting">{{ formatBytes(dir.size_bytes) }}</td>
                       <td class="py-2 text-right text-theme-supporting">{{ dir.file_count }}</td>
@@ -311,7 +311,7 @@
             class="flex items-start gap-3 p-4 border rounded-lg cursor-pointer transition-colors"
             :class="sidebarGroupStyle === option.value
               ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-              : 'border-gray-300 dark:border-gray-600 hover:border-blue-400'"
+              : 'border-control hover:border-blue-400'"
           >
             <input
               v-model="sidebarGroupStyle"
@@ -352,7 +352,7 @@
             <label class="block text-sm font-medium text-theme-body mb-2">
               {{ $t('settings.custom_css') }}
             </label>
-            <div class="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden" style="height: 300px;">
+            <div class="border border-control rounded-lg overflow-hidden" style="height: 300px;">
               <MonacoEditor
                 v-model="customCSS"
                 language="css"
@@ -365,7 +365,7 @@
             <label class="block text-sm font-medium text-theme-body mb-2">
               {{ $t('settings.custom_js') }}
             </label>
-            <div class="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden" style="height: 300px;">
+            <div class="border border-control rounded-lg overflow-hidden" style="height: 300px;">
               <MonacoEditor
                 v-model="customJS"
                 language="javascript"
@@ -540,9 +540,9 @@
             reselect-fallback="点击或拖拽可重新选择文件"
           />
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
           <button
-            class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             @click="restoreModalVisible = false"
           >
             {{ $t('settings.backup_confirm_cancel') }}

@@ -12,7 +12,7 @@
     <div class="relative z-10 w-full max-w-md">
       <div class="bg-white/70 backdrop-blur-xl rounded-2xl shadow-xl border border-white/30 p-8 dark:bg-gray-800/70 dark:border-gray-700/30">
         <div class="text-center mb-8">
-          <div class="inline-flex items-center justify-center w-16 h-16 bg-transparent border border-gray-300 dark:border-gray-600 rounded-2xl mb-4">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-transparent border border-control rounded-2xl mb-4">
             <IconKey class="w-8 h-8 text-theme-high" />
           </div>
           <h1 class="text-3xl font-bold text-theme-high mb-2">{{ t('tokenSetup.title') }}</h1>
@@ -66,7 +66,7 @@
             <span>{{ loading ? t('tokenSetup.saving') : t('tokenSetup.save') }}</span>
             <IconSpinner v-if="loading" class="animate-spin ml-2 h-5 w-5 text-white" />
           </button>
-          <button type="button" class="w-full flex justify-center py-3 px-4 border border-gray-300 rounded-xl text-sm font-medium text-theme-body hover:bg-gray-50 transition-colors disabled:opacity-50 dark:border-gray-600 dark:hover:bg-gray-700" :disabled="loading" @click="handleSkip">
+          <button type="button" class="w-full flex justify-center py-3 px-4 border border-control rounded-xl text-sm font-medium text-theme-body hover:bg-gray-50 transition-colors disabled:opacity-50 dark:hover:bg-gray-700" :disabled="loading" @click="handleSkip">
             {{ t('tokenSetup.skip') }}
           </button>
         </form>

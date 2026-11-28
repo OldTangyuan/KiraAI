@@ -98,7 +98,7 @@
     content-style="max-height: 95vh;"
   >
     <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl flex flex-col max-h-[95vh] modal-card">
-      <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
         <div class="flex-1 min-w-0">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('sessions.modal_title') }}</h3>
           <p class="text-sm text-theme-subtle truncate mt-1">{{ currentSessionId }}</p>
@@ -171,16 +171,16 @@
             :height="350"
             :folding="false"
             :sticky-scroll="false"
-            class="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden"
+            class="border border-control rounded-lg overflow-hidden"
           />
         </div>
       </div>
-      <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+      <div class="px-6 py-4 border-t border-divider flex justify-between items-center">
         <div class="flex items-center space-x-2 text-sm text-theme-subtle">
           <span>{{ $t('sessions.message_count') }}: {{ messageCount }}</span>
         </div>
         <div class="flex space-x-3">
-          <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="editorVisible = false">{{ $t('sessions.modal_cancel') }}</button>
+          <button class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="editorVisible = false">{{ $t('sessions.modal_cancel') }}</button>
           <button class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors" :disabled="saving" @click="handleSave">
             <span v-if="saving">{{ $t('sessions.save') }}...</span>
             <span v-else>{{ $t('sessions.modal_save') }}</span>

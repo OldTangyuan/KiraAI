@@ -22,7 +22,7 @@
         <div
           v-if="entry.type === 'group' && (index === 0 || visibleEntries[index - 1]?.type === 'item')"
           data-sidebar-ungrouped-drop
-          class="p-3 border border-dashed border-gray-300 dark:border-gray-600 rounded-lg text-xs text-center text-theme-subtle"
+          class="p-3 border border-dashed border-control rounded-lg text-xs text-center text-theme-subtle"
           :class="{ 'bg-blue-50 dark:bg-blue-900/20': dragged?.type === 'item' }"
         >{{ $t('settings.sidebar_layout_drop_top_level') }}</div>
         <SidebarLayoutItem
@@ -34,7 +34,7 @@
           @drag="startDrag($event, { type: 'item', id: entry.id })"
           @visibility="toggleHidden(entry.id)"
         />
-        <div v-else-if="entry.type === 'group'" :data-sidebar-group="entry.id" class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-900" :class="{ 'opacity-60': hiddenItems.includes(entry.id) }">
+        <div v-else-if="entry.type === 'group'" :data-sidebar-group="entry.id" class="border border-divider rounded-lg overflow-hidden bg-white dark:bg-gray-900" :class="{ 'opacity-60': hiddenItems.includes(entry.id) }">
           <div
             class="flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800"
           >
@@ -89,13 +89,13 @@
       <div
         v-if="!hasGroups"
         data-sidebar-ungrouped-drop
-        class="p-3 border border-dashed border-gray-300 dark:border-gray-600 rounded-lg text-xs text-center text-theme-subtle"
+        class="p-3 border border-dashed border-control rounded-lg text-xs text-center text-theme-subtle"
         :class="{ 'bg-blue-50 dark:bg-blue-900/20': dragged?.type === 'item' }"
       >{{ $t('settings.sidebar_layout_drop_top_level') }}</div>
       <div
         v-else
         data-sidebar-group-end
-        class="p-3 border border-dashed border-gray-300 dark:border-gray-600 rounded-lg text-xs text-center text-theme-subtle"
+        class="p-3 border border-dashed border-control rounded-lg text-xs text-center text-theme-subtle"
         :class="{ 'bg-blue-50 dark:bg-blue-900/20': dragged?.type === 'group' }"
       >{{ $t('settings.sidebar_layout_drop_group_end') }}</div>
     </div>

@@ -2,7 +2,7 @@
   <div>
     <button
       type="button"
-      class="flex w-full items-center justify-between gap-3 rounded-lg border border-gray-300 px-3 py-2 text-sm text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 disabled:opacity-50"
+      class="flex w-full items-center justify-between gap-3 rounded-lg border border-control px-3 py-2 text-sm text-theme-body hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50"
       :disabled="disabled"
       @click="openPicker"
     >
@@ -13,7 +13,7 @@
 
   <Modal v-model="visible" content-class="max-w-2xl">
     <section class="flex max-h-[85vh] flex-col rounded-lg bg-white shadow-xl dark:bg-gray-900" role="dialog" aria-modal="true" :aria-label="label" @keydown.esc.stop.prevent="visible = false">
-      <div class="flex items-center justify-between gap-4 border-b border-gray-200 px-6 py-4 dark:border-gray-700">
+      <div class="flex items-center justify-between gap-4 border-b border-divider px-6 py-4">
         <div>
           <h3 class="text-lg font-semibold text-theme-strong">{{ label }}</h3>
           <p class="mt-1 text-xs text-theme-subtle">{{ $t('plugin.subagents.tools_picker_hint') }}</p>
@@ -23,7 +23,7 @@
       <div class="min-h-0 flex-1 space-y-4 overflow-y-auto px-6 py-4">
         <div class="flex items-center gap-2">
           <UiInput ref="searchInput" v-model="query" :placeholder="$t('plugin.subagents.tools_search')" :aria-label="$t('plugin.subagents.tools_search')" class="min-w-0 flex-1 rounded-lg px-3 py-2 text-sm" />
-          <button type="button" class="rounded-md border border-gray-300 p-2 text-theme-subtle hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 disabled:opacity-50" :disabled="loading" :aria-label="$t('common.refresh')" @click="loadTools"><IconRefresh class="h-4 w-4" :class="{ 'animate-spin': loading }" /></button>
+          <button type="button" class="rounded-md border border-control p-2 text-theme-subtle hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50" :disabled="loading" :aria-label="$t('common.refresh')" @click="loadTools"><IconRefresh class="h-4 w-4" :class="{ 'animate-spin': loading }" /></button>
         </div>
         <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
           <span class="text-theme-subtle">{{ $t('plugin.subagents.tools_selected', { count: draft.length }) }}</span>
@@ -69,7 +69,7 @@
             </label>
           </div>
         </CollapsibleSection>
-        <div class="border-t border-gray-200 pt-4 dark:border-gray-700">
+        <div class="border-t border-divider pt-4">
           <p class="mb-1 text-sm font-medium text-theme-body">{{ $t('plugin.subagents.tools_manual') }}</p>
           <div role="group" :aria-label="$t('plugin.subagents.tools_manual')">
             <TagInput v-model="toolNames" :placeholder="$t('plugin.subagents.tools_manual_placeholder')" />
@@ -77,8 +77,8 @@
           <p class="mt-2 text-xs text-theme-subtle">{{ $t('plugin.subagents.tools_manual_hint') }}</p>
         </div>
       </div>
-      <div class="flex justify-end gap-3 border-t border-gray-200 px-6 py-4 dark:border-gray-700">
-        <button type="button" class="rounded-lg border border-gray-300 px-4 py-2 text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800" @click="visible = false">{{ $t('plugin.config_modal_cancel') }}</button>
+      <div class="flex justify-end gap-3 border-t border-divider px-6 py-4">
+        <button type="button" class="rounded-lg border border-control px-4 py-2 text-theme-body hover:bg-gray-50 dark:hover:bg-gray-800" @click="visible = false">{{ $t('plugin.config_modal_cancel') }}</button>
         <button type="button" class="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600" @click="applySelection">{{ $t('plugin.subagents.tools_confirm') }}</button>
       </div>
     </section>
