@@ -64,7 +64,7 @@
         </p>
         <div class="flex justify-end space-x-3 mt-4">
           <button
-            class="px-3 py-1.5 text-xs font-medium rounded-md border border-gray-300 text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 transition-colors"
+            class="px-3 py-1.5 text-xs font-medium rounded-md border border-control text-theme-body hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
             @click="openEditDialog(adapter)"
           >
             {{ $t('adapter.edit') }}
@@ -82,7 +82,7 @@
     <!-- Create/Edit Modal -->
     <Modal v-model="dialogVisible" content-class="max-w-md">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">
             {{ editMode ? $t('adapter.edit_title') : $t('adapter.add') }}
           </h3>
@@ -181,9 +181,9 @@
             <ConfigForm ref="configFormRef" v-model="form.config" :schema="adapterSchema" />
           </div>
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
           <button
-            class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             @click="dialogVisible = false"
           >
             {{ $t('adapter.modal_cancel') }}

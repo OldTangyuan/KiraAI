@@ -21,16 +21,16 @@
         </label>
         <div class="flex gap-3">
           <button type="submit" :disabled="saving || deleting || !form.nickname.trim() || !form.peer_nickname.trim()" class="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 transition-colors disabled:opacity-50">{{ t(saving ? 'webchat.saving' : 'webchat.save') }}</button>
-          <button v-if="profile" type="button" class="rounded-lg border border-gray-300 px-4 py-2 text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700 transition-colors disabled:opacity-50" :disabled="saving || deleting" @click="closeProfile">{{ t('webchat.cancel') }}</button>
+          <button v-if="profile" type="button" class="rounded-lg border border-control px-4 py-2 text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50" :disabled="saving || deleting" @click="closeProfile">{{ t('webchat.cancel') }}</button>
         </div>
-        <div class="space-y-2 border-t border-gray-200 pt-5 dark:border-gray-700">
+        <div class="space-y-2 border-t border-divider pt-5">
           <div class="flex items-center justify-between gap-4">
             <span id="webchat-markdown-label" class="text-sm text-theme-body">{{ t('webchat.markdown_render') }}</span>
             <ToggleSwitch :model-value="chatMarkdownEnabled" show-state aria-labelledby="webchat-markdown-label" aria-describedby="webchat-markdown-hint" @update:model-value="setChatMarkdownEnabled" />
           </div>
           <p id="webchat-markdown-hint" class="text-sm text-theme-subtle">{{ t('webchat.markdown_render_desc') }}</p>
         </div>
-        <div class="space-y-4 border-t border-gray-200 pt-5 dark:border-gray-700">
+        <div class="space-y-4 border-t border-divider pt-5">
           <h5 class="text-sm font-semibold text-theme-strong">{{ t('webchat.tool_permissions') }}</h5>
           <div class="flex items-center justify-between gap-4">
             <span id="webchat-file-tools-label" class="text-sm text-theme-body">{{ t('webchat.allow_file_tools') }}</span>
@@ -43,7 +43,7 @@
           <p class="text-sm text-theme-subtle" role="status">{{ t(savingConfig ? 'webchat.saving' : 'webchat.tool_permissions_hint') }}</p>
           <p v-if="configError" role="alert" class="text-sm text-status-danger dark:text-red-300">{{ configError }}</p>
         </div>
-        <div v-if="profile" class="border-t border-gray-200 pt-5 dark:border-gray-700">
+        <div v-if="profile" class="border-t border-divider pt-5">
           <button type="button" :disabled="deleting || saving || sending" class="rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700 transition-colors disabled:opacity-50" @click="deleteConfirmModalRef?.open()">{{ t(deleting ? 'webchat.deleting' : 'webchat.delete_history') }}</button>
           <p class="mt-2 text-sm text-theme-subtle">{{ t('webchat.delete_history_hint') }}</p>
           <p v-if="historyDeleted" role="status" class="mt-2 text-sm text-theme-subtle">{{ t('webchat.history_deleted') }}</p>
@@ -53,7 +53,7 @@
     <template v-else>
       <div ref="messageList" @scroll="onMessageScroll" role="log" :aria-label="t('webchat.messages')" dir="ltr" class="min-h-0 flex-1 overflow-y-auto [overflow-anchor:none]">
         <div ref="messageContent" dir="ltr" class="mx-auto w-full max-w-[1280px] space-y-4 px-6 py-5">
-          <button v-if="hasOlder" type="button" :disabled="loadingOlder" class="w-full rounded-lg border border-gray-200 dark:border-gray-700 py-2 text-sm text-status-info dark:text-blue-300 disabled:opacity-50" @click="loadOlder">{{ t(loadingOlder ? 'webchat.loading' : 'sessions.history.load_more') }}</button>
+          <button v-if="hasOlder" type="button" :disabled="loadingOlder" class="w-full rounded-lg border border-divider py-2 text-sm text-status-info dark:text-blue-300 disabled:opacity-50" @click="loadOlder">{{ t(loadingOlder ? 'webchat.loading' : 'sessions.history.load_more') }}</button>
           <p v-if="historyLoaded && !messages.length" class="py-10 text-center text-theme-subtle">{{ t('webchat.empty') }}</p>
           <article v-for="message in messages" :key="message.id" class="flex" :class="message.direction === 'incoming' ? 'justify-end' : 'justify-start'">
             <div class="min-w-0 max-w-[85%] flex flex-col gap-2" :class="message.direction === 'incoming' ? 'items-end' : 'items-start'">
@@ -101,7 +101,7 @@
                   <Plus aria-hidden="true" class="h-5 w-5" />
                 </button>
                 <Transition name="attachment-menu">
-                  <div v-if="attachmentMenuOpen" id="webchat-attachment-menu" role="menu" :aria-label="t('webchat.add_attachment')" class="absolute bottom-full left-0 z-40 mb-2 min-w-48 rounded-xl border border-gray-200 bg-white/95 p-1.5 text-theme-supporting shadow-lg dark:border-gray-700 dark:bg-[#1b1b1f]/95" @keydown="onAttachmentMenuKey">
+                  <div v-if="attachmentMenuOpen" id="webchat-attachment-menu" role="menu" :aria-label="t('webchat.add_attachment')" class="absolute bottom-full left-0 z-40 mb-2 min-w-48 rounded-xl border border-divider bg-white/95 p-1.5 text-theme-supporting shadow-lg dark:bg-[#1b1b1f]/95" @keydown="onAttachmentMenuKey">
                     <button type="button" role="menuitem" class="attachment-menu-item hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-[#2b2b2e] dark:focus-visible:bg-[#2b2b2e]" @click="chooseAttachment('image')">
                       <Picture aria-hidden="true" class="h-5 w-5" />
                       <span>{{ t('webchat.add_image') }}</span>

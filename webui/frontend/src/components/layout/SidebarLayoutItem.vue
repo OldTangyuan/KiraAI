@@ -1,7 +1,7 @@
 <template>
   <div
     :data-sidebar-item-id="item.id"
-    class="flex flex-wrap items-center gap-2 p-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+    class="flex flex-wrap items-center gap-2 p-2 rounded-lg border border-divider bg-white dark:bg-gray-900"
     :class="{ 'opacity-60': hidden }"
   >
     <button

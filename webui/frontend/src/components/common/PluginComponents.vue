@@ -12,7 +12,7 @@
         :label="$t('plugin.components_tools_hint')"
         class="mt-2"
       />
-      <ul class="mt-2 divide-y divide-gray-200 rounded-lg border border-gray-200 dark:divide-gray-700 dark:border-gray-700">
+      <ul class="mt-2 divide-y divide-gray-200 rounded-lg border border-divider dark:divide-gray-700">
         <li v-for="(component, index) in group.items" :key="index" class="px-4 py-3">
           <div v-if="component.type === 'page'" class="flex flex-wrap items-start justify-between gap-2 text-sm">
             <RouterLink

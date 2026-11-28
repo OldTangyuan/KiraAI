@@ -87,7 +87,7 @@
           type="button"
           class="px-3 py-1.5 text-xs font-medium rounded-md border transition-colors"
           :class="updating
-            ? 'border-gray-200 text-theme-faint cursor-wait dark:border-gray-700'
+            ? 'border-divider text-theme-faint cursor-wait'
             : 'border-green-300 text-status-success hover:bg-green-50 dark:border-green-600 dark:text-green-400 dark:hover:bg-green-900/30'"
           :disabled="updating"
           @click.stop="!updating && emit('update')"
@@ -101,7 +101,7 @@
         <button
           v-if="!error"
           type="button"
-          class="px-3 py-1.5 text-xs font-medium rounded-md border border-gray-300 text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 transition-colors"
+          class="px-3 py-1.5 text-xs font-medium rounded-md border border-control text-theme-body hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
           @click.stop="emit('configure')"
         >
           {{ $t('plugin.configure') }}
@@ -111,8 +111,8 @@
           type="button"
           class="px-3 py-1.5 text-xs font-medium rounded-md border transition-colors"
           :class="reloading
-            ? 'border-gray-200 text-theme-faint cursor-wait dark:border-gray-700'
-            : 'border-gray-300 text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800'"
+            ? 'border-divider text-theme-faint cursor-wait'
+            : 'border-control text-theme-body hover:bg-gray-50 dark:hover:bg-gray-800'"
           :disabled="reloading || operationsBusy"
           @click.stop="!reloading && !operationsBusy && emit('reload')"
         >
@@ -127,7 +127,7 @@
           class="px-3 py-1.5 text-xs font-medium rounded-md border transition-colors"
           :class="uninstallable
             ? 'border-red-300 text-status-danger hover:bg-red-50 dark:border-red-600 dark:text-red-400 dark:hover:bg-red-900/30'
-            : 'border-gray-200 text-theme-faint cursor-not-allowed dark:border-gray-700'"
+            : 'border-divider text-theme-faint cursor-not-allowed'"
           :disabled="!uninstallable || operationsBusy"
           @click.stop="uninstallable && !operationsBusy && emit('uninstall')"
         >
@@ -141,7 +141,7 @@
           type="button"
           class="px-3 py-1.5 text-xs font-medium rounded-md border transition-colors"
           :class="updating
-            ? 'border-gray-200 text-theme-faint cursor-wait dark:border-gray-700'
+            ? 'border-divider text-theme-faint cursor-wait'
             : 'border-green-300 text-status-success hover:bg-green-50 dark:border-green-600 dark:text-green-400 dark:hover:bg-green-900/30'"
           :disabled="updating"
           @click.stop="!updating && emit('update')"
@@ -157,7 +157,7 @@
           type="button"
           class="px-3 py-1.5 text-xs font-medium rounded-md border transition-colors"
           :class="installed
-            ? 'border-gray-200 text-theme-faint cursor-default dark:border-gray-700'
+            ? 'border-divider text-theme-faint cursor-default'
             : 'border-blue-300 text-status-info hover:bg-blue-50 dark:border-blue-600 dark:text-blue-400 dark:hover:bg-blue-900/30'"
           :disabled="installed || installing"
           @click.stop="!installed && !installing && emit('install')"

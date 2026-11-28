@@ -3,7 +3,7 @@
     <div class="flex flex-wrap items-center gap-2 mb-4">
       <button
         type="button"
-        class="inline-flex items-center px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
+        class="inline-flex items-center px-3 py-1.5 border border-control rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
         :disabled="loading || operationsBusy"
         @click="openEditor()"
       >
@@ -12,7 +12,7 @@
       </button>
       <button
         type="button"
-        class="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
+        class="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-1.5 border border-control rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
         :disabled="loading || operationsBusy"
         @click="loadPresets"
       >
@@ -84,7 +84,7 @@
           <div class="flex items-center justify-end space-x-3">
             <button
               type="button"
-              class="px-3 py-1.5 text-xs font-medium rounded-md border border-gray-300 text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 transition-colors disabled:opacity-50"
+              class="px-3 py-1.5 text-xs font-medium rounded-md border border-control text-theme-body hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50"
               :disabled="operationsBusy"
               @click.stop="openEditor(preset)"
             >{{ $t(preset.plugin_id ? 'plugin.subagents.view' : 'plugin.configure') }}</button>
@@ -108,7 +108,7 @@
     @update:model-value="setEditorVisible"
   >
     <form class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col max-h-[90vh]" @submit.prevent="savePreset">
-      <div class="flex justify-between items-center gap-4 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex justify-between items-center gap-4 px-6 py-4 border-b border-divider">
         <div class="min-w-0">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t(readOnly ? 'plugin.subagents.view' : editingId ? 'plugin.subagents.edit' : 'plugin.subagents.create') }}</h3>
           <p class="mt-1 text-sm text-theme-subtle break-words">{{ editingId ? form.name : $t('plugin.subagents.description') }}</p>
@@ -224,8 +224,8 @@
           <p v-if="saveError" role="alert" class="whitespace-pre-wrap break-words text-sm text-status-danger dark:text-red-400">{{ saveError }}</p>
         </fieldset>
       </div>
-      <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
-        <button type="button" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50" :disabled="saving" @click="editorVisible = false">{{ $t(readOnly ? 'plugin.close' : 'plugin.config_modal_cancel') }}</button>
+      <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
+        <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50" :disabled="saving" @click="editorVisible = false">{{ $t(readOnly ? 'plugin.close' : 'plugin.config_modal_cancel') }}</button>
         <button v-if="!readOnly" type="submit" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="saving">{{ $t(saving ? 'plugin.subagents.saving' : 'plugin.config_modal_save') }}</button>
       </div>
     </form>

@@ -12,7 +12,7 @@
     <div class="relative z-10 w-full max-w-md">
       <div class="max-h-[calc(100vh-2rem)] flex flex-col bg-white/70 backdrop-blur-xl rounded-2xl shadow-xl border border-white/30 p-8 dark:bg-gray-800/70 dark:border-gray-700/30">
         <div class="text-center mb-8">
-          <div class="inline-flex items-center justify-center w-16 h-16 bg-transparent border border-gray-300 dark:border-gray-600 rounded-2xl mb-4">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-transparent border border-control rounded-2xl mb-4">
             <IconLightning class="w-8 h-8 text-theme-high" />
           </div>
           <h1 class="text-3xl font-bold text-theme-high mb-2">{{ t('onboarding.title') }}</h1>
@@ -42,13 +42,13 @@
 
         <div v-else class="-mx-1 min-h-0 flex-1 space-y-4 overflow-y-auto px-1 py-1">
           <p class="text-sm text-theme-supporting">{{ t('onboarding.configuration_hint') }}</p>
-          <button v-for="item in configurationItems" :key="item.key" type="button" class="w-full flex items-center gap-4 p-4 text-left rounded-xl border border-gray-200 bg-white/70 hover:border-blue-400 hover:bg-blue-50/70 transition-colors dark:border-gray-700 dark:bg-gray-800/70 dark:hover:border-blue-500 dark:hover:bg-gray-700" @click="openConfiguration(item.key)">
+          <button v-for="item in configurationItems" :key="item.key" type="button" class="w-full flex items-center gap-4 p-4 text-left rounded-xl border border-divider bg-white/70 hover:border-blue-400 hover:bg-blue-50/70 transition-colors dark:bg-gray-800/70 dark:hover:border-blue-500 dark:hover:bg-gray-700" @click="openConfiguration(item.key)">
             <span class="flex items-center justify-center w-8 h-8 rounded-full bg-status-info-soft text-sm font-semibold text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">{{ item.order }}</span>
             <span class="flex-1"><span class="block font-medium text-theme-high">{{ t(item.titleKey) }}</span><span class="block mt-1 text-xs text-theme-subtle">{{ t(item.descriptionKey) }}</span></span>
             <span class="text-status-info dark:text-blue-400" aria-hidden="true">→</span>
           </button>
           <div class="flex gap-3 pt-2">
-            <button type="button" class="flex-1 py-3 px-4 border border-gray-300 rounded-xl text-sm font-medium text-theme-body hover:bg-gray-50 transition-colors dark:border-gray-600 dark:hover:bg-gray-700" @click="step = 1">{{ t('onboarding.back') }}</button>
+            <button type="button" class="flex-1 py-3 px-4 border border-control rounded-xl text-sm font-medium text-theme-body hover:bg-gray-50 transition-colors dark:hover:bg-gray-700" @click="step = 1">{{ t('onboarding.back') }}</button>
             <button type="button" class="flex-1 flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-[#2563eb] hover:bg-[#1d4ed8] transition-all duration-200 disabled:opacity-50 dark:bg-blue-600 dark:hover:bg-blue-700" :disabled="loading" @click="handleSubmit">
               <span>{{ loading ? t('onboarding.saving') : t('onboarding.finish') }}</span>
               <IconSpinner v-if="loading" class="animate-spin ml-2 h-5 w-5 text-white" />
@@ -65,7 +65,7 @@
 
     <Modal v-model="configurationModalVisible" content-class="max-w-6xl" content-style="max-height: 90vh">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-divider">
           <h2 class="text-lg font-semibold text-theme-strong">{{ selectedConfigurationTitle }}</h2>
           <button type="button" class="text-theme-faint text-theme-faint-hover" :aria-label="t('onboarding.close_configuration')" @click="configurationModalVisible = false">
             <IconClose class="w-6 h-6" />

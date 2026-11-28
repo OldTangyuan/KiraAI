@@ -63,7 +63,7 @@
       </div>
 
       <div v-else class="flex flex-col flex-1 overflow-y-auto pr-2">
-        <div class="border-b border-gray-200 dark:border-gray-700 pb-4 mb-6">
+        <div class="border-b border-divider pb-4 mb-6">
           <h3 class="text-xl font-semibold text-theme-strong truncate">{{ selectedProvider?.name }}</h3>
           <p class="text-sm text-theme-subtle mt-1 truncate">{{ selectedProvider && localizeProviderType(selectedProvider) }}</p>
         </div>
@@ -110,7 +110,7 @@
           <div
             v-for="modelType in selectedProvider.supported_model_types"
             :key="modelType"
-            class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
+            class="border border-divider rounded-lg overflow-hidden"
           >
             <div
               class="flex items-center justify-between px-4 py-3 bg-gray-50 dark:bg-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
@@ -134,7 +134,7 @@
                 <div
                   v-for="(modelConfig, modelId) in providerModels[modelType]"
                   :key="modelId"
-                  class="flex items-center justify-between py-1 border-b border-gray-100 dark:border-gray-800 last:border-b-0"
+                  class="flex items-center justify-between py-1 border-b border-divider-soft last:border-b-0"
                 >
                   <span class="flex-1 text-sm text-theme-strong">{{ modelConfig.model_name }}</span>
                   <div class="flex items-center space-x-2">
@@ -160,7 +160,7 @@
                 {{ $t('provider.no_models') }}
               </div>
               <div class="mt-2 flex items-center gap-2">
-                <button class="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50" :disabled="!providerSchema" @click="openAddModelDialog(modelType)">
+                <button class="px-3 py-1.5 text-sm border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50" :disabled="!providerSchema" @click="openAddModelDialog(modelType)">
                   + {{ $t('provider.add_model') }}
                 </button>
                 <button class="px-3 py-1.5 text-sm border border-green-300 dark:border-green-600 rounded-lg text-green-700 dark:text-green-300 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors flex items-center disabled:opacity-50" :disabled="selectedProvider.status !== 'active'" @click="openFetchRemoteModels(modelType)">
@@ -177,7 +177,7 @@
     <!-- Create Provider Dialog -->
     <Modal v-model="createDialogVisible" content-class="max-w-md">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('provider.add') }}</h3>
           <button class="text-theme-faint text-theme-faint-hover" @click="createDialogVisible = false">
             <IconClose class="w-6 h-6" />
@@ -206,8 +206,8 @@
             <ConfigForm ref="createConfigFormRef" v-model="createForm.config" :schema="createSchema" />
           </div>
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
-          <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="createDialogVisible = false">{{ $t('provider.cancel') }}</button>
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
+          <button class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="createDialogVisible = false">{{ $t('provider.cancel') }}</button>
           <button class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors" :disabled="creating" @click="handleCreate">{{ $t('provider.save') }}</button>
         </div>
       </div>
@@ -216,7 +216,7 @@
     <!-- Add/Edit Model Dialog -->
     <Modal v-model="modelDialogVisible" content-class="max-w-md">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full modal-card flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ modelEditMode ? $t('provider.edit_model') : $t('provider.add_model') }}</h3>
           <button class="text-theme-faint text-theme-faint-hover" @click="modelDialogVisible = false">
             <IconClose class="w-6 h-6" />
@@ -246,8 +246,8 @@
             <ConfigForm ref="modelConfigFormRef" v-model="modelForm.config" :schema="modelSchema" />
           </div>
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
-          <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="modelDialogVisible = false">{{ $t('provider.cancel') }}</button>
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
+          <button class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="modelDialogVisible = false">{{ $t('provider.cancel') }}</button>
           <button class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors" :disabled="addingModel" @click="handleAddModel">{{ $t('provider.save') }}</button>
         </div>
       </div>
@@ -275,7 +275,7 @@
     <!-- Remote Model Selection Modal -->
     <Modal v-model="remoteModelDialogVisible" content-class="max-w-2xl">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 80vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider flex-shrink-0">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('provider.fetch_remote_models') }}</h3>
           <button class="text-theme-faint text-theme-faint-hover" @click="remoteModelDialogVisible = false">
             <IconClose class="w-6 h-6" />
@@ -302,14 +302,14 @@
                 class="flex-1 rounded-lg px-3 py-2 text-sm transition-colors"
               />
               <button
-                class="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
+                class="px-3 py-2 text-sm border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
                 @click="toggleAllRemoteModels"
               >
                 {{ filteredRemoteModels.every(m => m.selected) ? $t('provider.deselect_all') : $t('provider.select_all') }}
               </button>
             </div>
             <!-- Model list (scrollable) -->
-            <div class="flex-1 overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-lg divide-y divide-gray-100 dark:divide-gray-800">
+            <div class="flex-1 overflow-y-auto border border-divider rounded-lg divide-y divide-gray-100 dark:divide-gray-800">
               <div
                 v-for="model in filteredRemoteModels"
                 :key="model.id"
@@ -343,9 +343,9 @@
             </div>
           </template>
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3 flex-shrink-0">
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3 flex-shrink-0">
           <button
-            class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             @click="remoteModelDialogVisible = false"
           >{{ $t('provider.cancel') }}</button>
           <button

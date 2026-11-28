@@ -98,7 +98,7 @@
         <div
           v-if="mobileMenuOpen"
           id="mobile-header-menu-panel"
-          class="mobile-header-menu-panel absolute right-0 top-full mt-2 min-w-48 rounded-xl border border-gray-200 bg-white/95 p-1.5 text-theme-supporting shadow-lg dark:border-gray-700 dark:bg-[#1b1b1f]/95"
+          class="mobile-header-menu-panel absolute right-0 top-full mt-2 min-w-48 rounded-xl border border-divider bg-white/95 p-1.5 text-theme-supporting shadow-lg dark:bg-[#1b1b1f]/95"
         >
           <button type="button" class="mobile-header-menu-item hover:bg-gray-100 active:bg-gray-200 focus-visible:bg-gray-100 dark:hover:bg-[#2b2b2e] dark:active:bg-[#3a3a3e] dark:focus-visible:bg-[#2b2b2e]" @click="openQuickNavFromMobileMenu">
             <IconSearch class="w-5 h-5" />

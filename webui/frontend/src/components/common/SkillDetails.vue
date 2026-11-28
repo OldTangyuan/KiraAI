@@ -1,7 +1,7 @@
 <template>
   <Modal :model-value="modelValue" content-class="max-w-6xl" @update:model-value="close">
     <div role="dialog" aria-modal="true" aria-labelledby="skill-details-title" class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full min-w-0 overflow-hidden flex flex-col h-[90vh]">
-      <div class="flex shrink-0 items-start justify-between gap-4 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex shrink-0 items-start justify-between gap-4 px-6 py-4 border-b border-divider">
         <div class="min-w-0">
           <h3 id="skill-details-title" class="text-lg font-semibold text-theme-strong break-words">{{ skill?.name }}</h3>
         </div>
@@ -10,7 +10,7 @@
         </button>
       </div>
       <div class="skill-details-content flex-1 px-6 py-4 overflow-y-auto overflow-x-hidden min-h-0 min-w-0 max-w-full">
-        <section v-if="description" aria-labelledby="skill-description-title" class="mb-5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 p-4">
+        <section v-if="description" aria-labelledby="skill-description-title" class="mb-5 rounded-lg border border-divider bg-gray-50 dark:bg-gray-800 p-4">
           <h4 id="skill-description-title" class="text-sm font-medium text-theme-high">{{ $t('plugin.skills_description') }}</h4>
           <p class="mt-2 text-sm text-theme-supporting whitespace-pre-wrap break-words">{{ description }}</p>
         </section>
@@ -68,14 +68,14 @@
           </div>
         </div>
       </div>
-      <div class="px-6 py-4 flex shrink-0 justify-end gap-3 border-t border-gray-200 dark:border-gray-700">
+      <div class="px-6 py-4 flex shrink-0 justify-end gap-3 border-t border-divider">
         <template v-if="editing">
-          <button type="button" class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-theme-body enabled:hover:bg-gray-50 dark:enabled:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="saving" @click="cancelEdit">{{ $t('plugin.cancel') }}</button>
+          <button type="button" class="px-4 py-2 rounded-lg border border-control text-theme-body enabled:hover:bg-gray-50 dark:enabled:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="saving" @click="cancelEdit">{{ $t('plugin.cancel') }}</button>
           <button type="button" class="px-4 py-2 rounded-lg bg-blue-600 dark:bg-blue-700 text-white enabled:hover:bg-blue-700 dark:enabled:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="saving || !dirty" @click="saveContent">
             <IconSpinner v-if="saving" class="inline-block w-4 h-4 mr-1 animate-spin" />{{ $t('plugin.save') }}
           </button>
         </template>
-        <button v-else type="button" class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="close">{{ $t('plugin.close') }}</button>
+        <button v-else type="button" class="px-4 py-2 rounded-lg border border-control text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="close">{{ $t('plugin.close') }}</button>
       </div>
     </div>
   </Modal>

@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl flex flex-col max-h-[90vh] modal-card">
-    <div class="flex items-center justify-between gap-4 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+    <div class="flex items-center justify-between gap-4 px-6 py-4 border-b border-divider">
       <div class="min-w-0">
         <h3 class="text-lg font-semibold text-theme-strong break-all">{{ session.title || session.session_id || session.adapter_name || session.id }}</h3>
         <p class="text-sm text-theme-subtle break-all">{{ session.id }}</p>
@@ -8,7 +8,7 @@
       <button type="button" :aria-label="$t('sessions.history.close')" class="text-theme-faint text-theme-faint-hover" @click="$emit('close')"><IconClose class="w-6 h-6" /></button>
     </div>
     <div class="flex items-center justify-between gap-4 px-6 py-3">
-      <div role="tablist" :aria-label="$t('sessions.history.view')" class="flex gap-4 border-b border-gray-200 dark:border-gray-700">
+      <div role="tablist" :aria-label="$t('sessions.history.view')" class="flex gap-4 border-b border-divider">
         <button
           v-for="tab in tabs"
           :id="tabId(tab)"
@@ -33,7 +33,7 @@
           <p>{{ $t('sessions.history.load_failed') }}</p>
           <button type="button" class="mt-2 text-status-info dark:text-blue-300" @click="loadMessages(messages.length === 0)">{{ $t('sessions.history.retry') }}</button>
         </div>
-        <button v-else-if="nextCursor" type="button" class="w-full rounded-lg border border-gray-200 dark:border-gray-700 py-2 text-status-info dark:text-blue-300" @click="loadMessages(false)">{{ $t('sessions.history.load_more') }}</button>
+        <button v-else-if="nextCursor" type="button" class="w-full rounded-lg border border-divider py-2 text-status-info dark:text-blue-300" @click="loadMessages(false)">{{ $t('sessions.history.load_more') }}</button>
       </div>
       <p v-if="!loading && !error && !messages.length" class="py-10 text-center text-theme-subtle">{{ $t('sessions.history.empty') }}</p>
       <article v-for="message in messages" :key="message.id" class="flex" :class="message.direction === 'outgoing' ? 'justify-end' : 'justify-start'">

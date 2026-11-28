@@ -1,0 +1,12 @@
+/* Border colors replacing the global dark-mode border overrides. */
+.border-divider {
+  border-color: var(--color-border-divider);
+}
+
+.border-divider-soft {
+  border-color: var(--color-border-divider-soft);
+}
+
+.border-control {
+  border-color: var(--color-border-control);
+}

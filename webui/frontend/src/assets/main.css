@@ -3,6 +3,7 @@
 @import './components/form-controls.css';
 @import './components/theme-text.css';
 @import './components/status-colors.css';
+@import './components/borders.css';
 @import './components/chat-bubble.css';
 @import './components/markdown.css';
 
@@ -243,10 +244,6 @@ button,
   background-color: var(--color-selection);
 }
 
-.dark .border-gray-300 {
-  border-color: rgba(75, 85, 99, 0.4) !important;
-}
-
 /* Protect Monaco Editor internal textarea from global textarea styles */
 .monaco-editor textarea,
 .monaco-editor .inputarea {
@@ -376,12 +373,6 @@ button,
 }
 
 /* Stat / badge colors are defined by the status-colors component classes. */
-
-/* Borders / dividers — must hit 3:1 non-text contrast (WCAG 1.4.11) */
-.dark .border-gray-100,
-.dark .border-gray-200 { border-color: rgba(148, 163, 184, 0.24) !important; }
-.dark .border-gray-700,
-.dark .border-gray-800 { border-color: rgba(148, 163, 184, 0.22) !important; }
 
 /* ==================== Responsive ==================== */
 @media (max-width: 768px) {

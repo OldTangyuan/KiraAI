@@ -92,7 +92,7 @@
     </div>
 
     <!-- Category Tabs -->
-    <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+    <div class="mb-4 border-b border-divider">
       <nav class="flex space-x-0 -mb-px" role="tablist" :aria-label="$t('configuration.categories_aria', 'Configuration categories')">
         <button
           v-for="(tab, index) in visibleCategoryTabs"
@@ -125,7 +125,7 @@
     >
       <!-- Group Header -->
       <div
-        class="config-group-header flex items-center justify-between px-4 py-3 cursor-pointer rounded-t-lg select-none transition-colors duration-150 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 border border-gray-200 dark:border-gray-700"
+        class="config-group-header flex items-center justify-between px-4 py-3 cursor-pointer rounded-t-lg select-none transition-colors duration-150 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 border border-divider"
         :class="{ 'rounded-b-lg': collapsedGroups.has(group.id) }"
         role="button"
         tabindex="0"
@@ -159,14 +159,14 @@
       <!-- Horizontal layout (model selects) -->
       <div
         v-if="group.layout === 'horizontal'"
-        class="config-group-body border border-t-0 border-gray-200 dark:border-gray-700 rounded-b-lg bg-white dark:bg-gray-900 overflow-hidden transition-all duration-200"
+        class="config-group-body border border-t-0 border-divider rounded-b-lg bg-white dark:bg-gray-900 overflow-hidden transition-all duration-200"
         :class="{ 'max-h-0 opacity-0 py-0 border-0': collapsedGroups.has(group.id), 'max-h-[2000px] opacity-100': !collapsedGroups.has(group.id) }"
       >
         <div class="p-4 space-y-4">
           <div
             v-for="field in getVisibleFields(group)"
             :key="field.key"
-            class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 py-3 border-b border-gray-100 dark:border-gray-800 last:border-0"
+            class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 py-3 border-b border-divider-soft last:border-0"
             :class="{ 'config-field-modified': modifiedFields.has(field.key) }"
           >
             <div class="flex-shrink-0">
@@ -211,7 +211,7 @@
       <!-- Grid layout (regular fields) -->
       <div
         v-else
-        class="config-group-body border border-t-0 border-gray-200 dark:border-gray-700 rounded-b-lg bg-white dark:bg-gray-900 overflow-hidden transition-all duration-200"
+        class="config-group-body border border-t-0 border-divider rounded-b-lg bg-white dark:bg-gray-900 overflow-hidden transition-all duration-200"
         :class="{ 'max-h-0 opacity-0 py-0 border-0': collapsedGroups.has(group.id), 'max-h-[2000px] opacity-100': !collapsedGroups.has(group.id) }"
       >
         <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -327,7 +327,7 @@
     </div>
 
     <!-- Bottom keyboard hints -->
-    <div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
+    <div class="mt-4 pt-3 border-t border-divider-soft">
       <p class="text-xs text-theme-faint text-center">
         <kbd class="kbd-hint">Ctrl+Z</kbd> {{ $t('configuration.shortcut_undo') }}
         <kbd class="kbd-hint">Ctrl+Shift+Z</kbd> {{ $t('configuration.shortcut_redo') }}

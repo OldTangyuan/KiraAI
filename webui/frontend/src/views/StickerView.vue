@@ -19,7 +19,7 @@
       <IconWarning class="w-16 h-16 text-theme-faint mx-auto mb-4" />
       <p class="text-theme-subtle">{{ $t('sticker.load_failed') }}</p>
       <button
-        class="mt-3 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm"
+        class="mt-3 px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm"
         @click="loadStickers"
       >
         {{ $t('sticker.retry') }}
@@ -57,7 +57,7 @@
           <p class="text-sm text-theme-supporting truncate" :title="sticker.desc">{{ sticker.desc }}</p>
           <div class="mt-auto pt-3 flex justify-end space-x-3">
             <button
-              class="px-3 py-1.5 text-xs font-medium rounded-md border border-gray-300 text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 transition-colors"
+              class="px-3 py-1.5 text-xs font-medium rounded-md border border-control text-theme-body hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               @click="openEditDialog(sticker)"
             >
               {{ $t('sticker.edit') }}
@@ -76,7 +76,7 @@
     <!-- Create/Edit Modal -->
     <Modal v-model="dialogVisible" content-class="max-w-md">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">
             {{ editMode ? $t('sticker.modal_title_edit') : $t('sticker.modal_title_add') }}
           </h3>
@@ -133,9 +133,9 @@
             />
           </div>
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
           <button
-            class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             @click="dialogVisible = false"
           >
             {{ $t('sticker.modal_cancel') }}

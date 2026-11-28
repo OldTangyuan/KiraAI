@@ -26,7 +26,7 @@
           class="px-4 py-2 rounded-lg border transition-colors flex items-center whitespace-nowrap"
           :class="autoScroll
             ? 'border-blue-500 text-status-info bg-blue-50 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-500'
-            : 'border-gray-300 text-theme-supporting dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'"
+            : 'border-control text-theme-supporting hover:bg-gray-50 dark:hover:bg-gray-700'"
           :aria-pressed="autoScroll"
           @click="toggleAutoScroll"
         >
@@ -88,7 +88,7 @@
     <!-- Install dependencies modal -->
     <Modal v-model="showInstallPanel" content-class="max-w-md">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('logs.install_deps') }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="showInstallPanel = false">
             <IconClose class="w-6 h-6" />
@@ -106,8 +106,8 @@
             />
           </div>
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
-          <button type="button" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="showInstallPanel = false">{{ $t('logs.install_close') }}</button>
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
+          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="showInstallPanel = false">{{ $t('logs.install_close') }}</button>
           <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center" :disabled="isInstalling" @click="handleInstall">
             <IconSpinner v-if="isInstalling" class="w-5 h-5 mr-2 animate-spin" />
             <IconPackage v-else class="w-5 h-5 mr-2" />

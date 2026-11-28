@@ -46,7 +46,7 @@
     </div>
 
     <!-- Custom Tabs -->
-    <div class="flex flex-wrap gap-x-4 mb-4 border-b border-gray-200 dark:border-gray-700">
+    <div class="flex flex-wrap gap-x-4 mb-4 border-b border-divider">
       <button
         type="button"
         class="px-3 py-2 text-sm font-medium border-b-2 focus:outline-none transition-colors duration-150"
@@ -102,7 +102,7 @@
       <div class="flex flex-wrap items-center gap-2 mb-4">
         <button
           type="button"
-          class="inline-flex items-center px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          class="inline-flex items-center px-3 py-1.5 border border-control rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           :disabled="installing"
           @click="openInstallDialog"
         >
@@ -111,7 +111,7 @@
         </button>
         <button
           type="button"
-          class="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          class="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-1.5 border border-control rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           :disabled="refreshingPlugins"
           @click="refreshPlugins"
         >
@@ -201,7 +201,7 @@
       <div class="flex flex-wrap items-center gap-2 mb-4">
         <button
           type="button"
-          class="inline-flex items-center px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          class="inline-flex items-center px-3 py-1.5 border border-control rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           @click="openMcpCreate"
         >
           <span class="mr-1">+</span>
@@ -256,7 +256,7 @@
           <div class="mt-4 flex items-center justify-end space-x-3 mt-auto">
             <button
               type="button"
-              class="px-3 py-1.5 text-xs font-medium rounded-md border border-gray-300 text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 transition-colors"
+              class="px-3 py-1.5 text-xs font-medium rounded-md border border-control text-theme-body hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               @click.stop="openMcpEdit(server)"
             >
               {{ $t('plugin.mcp_edit') }}
@@ -278,7 +278,7 @@
       <div class="flex flex-wrap items-center gap-2 mb-4">
         <button
           type="button"
-          class="inline-flex items-center px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors mr-2"
+          class="inline-flex items-center px-3 py-1.5 border border-control rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors mr-2"
           @click="openSkillsUploadDialog"
         >
           <IconUpload class="w-4 h-4 mr-1" />
@@ -286,7 +286,7 @@
         </button>
         <button
           type="button"
-          class="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          class="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-1.5 border border-control rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           @click="refreshSkillList"
         >
           <IconRefresh class="w-4 h-4 mr-1" />
@@ -341,7 +341,7 @@
               <div class="flex items-center justify-end space-x-3">
               <button
                 type="button"
-                class="px-3 py-1.5 text-xs font-medium rounded-md border border-gray-300 text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 transition-colors"
+                class="px-3 py-1.5 text-xs font-medium rounded-md border border-control text-theme-body hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                 :title="$t('plugin.skills_export')"
                 @click.stop="handleExportSkill(skill)"
               >
@@ -393,24 +393,24 @@
                   <button
                     type="button"
                     class="px-2.5 py-1 text-xs rounded-l-md border transition-colors"
-                    :class="resource.mode === 'global' ? 'bg-status-success-soft dark:bg-green-900 text-green-700 dark:text-green-300 border-green-300 dark:border-green-700' : 'bg-white dark:bg-gray-800 text-theme-subtle border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'"
+                    :class="resource.mode === 'global' ? 'bg-status-success-soft dark:bg-green-900 text-green-700 dark:text-green-300 border-green-300 dark:border-green-700' : 'bg-white dark:bg-gray-800 text-theme-subtle border-control hover:bg-gray-50 dark:hover:bg-gray-700'"
                     @click="onScopeModeChange(resource, 'global')"
                   >{{ $t('plugin.scope_global') }}</button>
                   <button
                     type="button"
                     class="px-2.5 py-1 text-xs border-t border-b transition-colors"
-                    :class="resource.mode === 'allow' ? 'bg-status-info-soft dark:bg-blue-900 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-700' : 'bg-white dark:bg-gray-800 text-theme-subtle border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'"
+                    :class="resource.mode === 'allow' ? 'bg-status-info-soft dark:bg-blue-900 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-700' : 'bg-white dark:bg-gray-800 text-theme-subtle border-control hover:bg-gray-50 dark:hover:bg-gray-700'"
                     @click="onScopeModeChange(resource, 'allow')"
                   >{{ $t('plugin.scope_mode_allow') }}</button>
                   <button
                     type="button"
                     class="px-2.5 py-1 text-xs rounded-r-md border transition-colors"
-                    :class="resource.mode === 'deny' ? 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 border-red-300 dark:border-red-700' : 'bg-white dark:bg-gray-800 text-theme-subtle border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'"
+                    :class="resource.mode === 'deny' ? 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 border-red-300 dark:border-red-700' : 'bg-white dark:bg-gray-800 text-theme-subtle border-control hover:bg-gray-50 dark:hover:bg-gray-700'"
                     @click="onScopeModeChange(resource, 'deny')"
                   >{{ $t('plugin.scope_mode_deny') }}</button>
                 </div>
               </div>
-              <div v-if="resource.mode !== 'global'" class="mt-2 pt-2 border-t border-gray-100 dark:border-gray-800">
+              <div v-if="resource.mode !== 'global'" class="mt-2 pt-2 border-t border-divider-soft">
                 <p class="text-xs text-theme-faint mb-1.5">
                   {{ resource.mode === 'allow' ? $t('plugin.scope_mode_allow_hint') : $t('plugin.scope_mode_deny_hint') }}
                 </p>
@@ -453,7 +453,7 @@
       <div class="flex flex-wrap items-center gap-2 mb-4">
         <button
           type="button"
-          class="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          class="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-1.5 border border-control rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           @click="openSourceManage"
         >
           <IconCog class="w-4 h-4 mr-1" />
@@ -462,7 +462,7 @@
         <button
           v-if="currentStoreSource"
           type="button"
-          class="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          class="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-1.5 border border-control rounded-md text-xs font-medium text-theme-body bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           :disabled="storeLoading"
           @click="() => fetchStorePlugins(true)"
         >
@@ -505,7 +505,7 @@
           <p class="text-red-500">{{ storeError }}</p>
           <button
             type="button"
-            class="mt-3 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            class="mt-3 px-4 py-2 border border-control rounded-md text-sm text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             @click="() => fetchStorePlugins()"
           >
             {{ $t('common.refresh') }}
@@ -581,7 +581,7 @@
       <nav v-if="filteredStorePlugins.length > STORE_PAGE_SIZE" :aria-label="$t('pluginStore.pagination_label')" class="mt-6 flex flex-wrap items-center justify-center gap-2">
         <button
           type="button"
-          class="px-3 py-1.5 text-sm font-medium rounded-md border border-gray-300 text-theme-body hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:hover:bg-gray-800"
+          class="px-3 py-1.5 text-sm font-medium rounded-md border border-control text-theme-body hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-800"
           :disabled="storePage === 1"
           @click="storePage--"
         >
@@ -594,7 +594,7 @@
             class="min-w-8 px-2 py-1.5 text-sm font-medium rounded-md border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
             :class="page === storePage
               ? 'border-blue-600 bg-blue-600 text-white dark:border-blue-500 dark:bg-blue-500'
-              : 'border-gray-300 text-theme-body hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800'"
+              : 'border-control text-theme-body hover:bg-gray-50 dark:hover:bg-gray-800'"
             :aria-label="$t('pluginStore.pagination_page', { page })"
             :aria-current="page === storePage ? 'page' : undefined"
             @click="storePage = page"
@@ -605,7 +605,7 @@
         </template>
         <button
           type="button"
-          class="px-3 py-1.5 text-sm font-medium rounded-md border border-gray-300 text-theme-body hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:hover:bg-gray-800"
+          class="px-3 py-1.5 text-sm font-medium rounded-md border border-control text-theme-body hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-800"
           :disabled="storePage === storeTotalPages"
           @click="storePage++"
         >
@@ -616,7 +616,7 @@
       <!-- Plugin Sources Management Modal -->
       <Modal v-model="sourceManageVisible" content-class="max-w-lg">
         <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-          <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+          <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
             <h3 class="text-lg font-semibold text-theme-strong">{{ $t('pluginStore.source_manage') }}</h3>
             <button type="button" class="text-theme-faint text-theme-faint-hover" @click="sourceManageVisible = false">
               <IconClose class="w-6 h-6" />
@@ -633,7 +633,7 @@
                 class="flex items-center justify-between p-3 rounded-lg border transition-colors"
                 :class="currentStoreSource && currentStoreSource.id === src.id
                   ? 'border-blue-300 bg-blue-50 dark:border-blue-700 dark:bg-blue-900/20'
-                  : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800'"
+                  : 'border-divider bg-gray-50 dark:bg-gray-800'"
               >
                 <div class="flex-1 min-w-0 mr-3">
                   <div class="text-sm font-medium text-theme-high">{{ src.name }}</div>
@@ -669,7 +669,7 @@
             </div>
 
             <!-- Add New Source Form -->
-            <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="border-t border-divider pt-4">
               <div class="mb-3">
                 <label class="block text-sm font-medium text-theme-body mb-1">{{ $t('pluginStore.source_name') }}</label>
                 <UiInput
@@ -690,10 +690,10 @@
               </div>
             </div>
           </div>
-          <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
+          <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
             <button
               type="button"
-              class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               @click="sourceManageVisible = false"
             >
               {{ $t('pluginStore.cancel') }}
@@ -713,7 +713,7 @@
 
     <Modal v-model="storeInstallVisible" content-class="max-w-lg">
       <div v-if="storeInstallTarget" class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex items-start justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-start justify-between px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('pluginStore.install_details_title') }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="storeInstallVisible = false"><IconClose class="w-6 h-6" /></button>
         </div>
@@ -735,19 +735,19 @@
             <div><dt class="text-theme-subtle">{{ $t('plugin.plugin_id') }}</dt><dd class="mt-1 font-mono break-all text-theme-high">{{ storeInstallTarget.id }}</dd></div>
             <div v-if="storeInstallRepo" class="sm:col-span-2"><dt class="text-theme-subtle">{{ $t('plugin.repo_url') }}</dt><dd class="mt-1 break-all"><a :href="storeInstallRepo" target="_blank" rel="noopener noreferrer" class="text-status-info hover:text-blue-700 hover:underline dark:text-blue-400 dark:hover:text-blue-300">{{ storeInstallRepo }}</a></dd></div>
           </dl>
-          <div v-if="storeInstallTask" class="rounded-md border border-gray-200 p-3 text-sm dark:border-gray-700">
+          <div v-if="storeInstallTask" class="rounded-md border border-divider p-3 text-sm">
             <div class="flex items-center gap-2 text-theme-body"><IconSpinner v-if="storeInstallTask.status === 'running'" class="h-4 w-4 animate-spin text-status-info" /><span>{{ storeInstallStageLabel }}</span></div>
             <p v-if="storeInstallTask.error" class="mt-2 break-words text-status-danger dark:text-red-400">{{ storeInstallTask.error }}</p>
           </div>
         </div>
-        <div class="flex justify-end gap-3 border-t border-gray-200 px-6 py-4 dark:border-gray-700">
+        <div class="flex justify-end gap-3 border-t border-divider px-6 py-4">
           <template v-if="storeInstallPending">
             <button type="button" class="px-4 py-2 border border-red-300 text-status-danger rounded-lg hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-900/30 transition-colors disabled:opacity-50" :disabled="storeInstallTask?.stage === 'loading'" @click="cancelStoreInstall">{{ $t('pluginStore.install_cancel') }}</button>
             <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors" @click="storeInstallVisible = false">{{ $t('pluginStore.install_silent') }}</button>
           </template>
           <button v-else-if="storeInstallTask" type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors" @click="storeInstallVisible = false">{{ $t('plugin.close') }}</button>
           <template v-else>
-            <button type="button" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="storeInstallVisible = false">{{ $t('plugin.cancel') }}</button>
+            <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="storeInstallVisible = false">{{ $t('plugin.cancel') }}</button>
             <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors" :disabled="installing" @click="startStoreInstall">{{ $t('pluginStore.install') }}</button>
           </template>
         </div>
@@ -757,13 +757,13 @@
     <!-- Install Plugin Dialog -->
     <Modal v-model="installDialogVisible" content-class="max-w-md">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.install_add') }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="installDialogVisible = false">
             <IconClose class="w-6 h-6" />
           </button>
         </div>
-        <div class="flex border-b border-gray-200 dark:border-gray-700 px-6">
+        <div class="flex border-b border-divider px-6">
           <button
             type="button"
             class="px-4 py-3 text-sm font-medium border-b-2 focus:outline-none transition-colors duration-150"
@@ -822,8 +822,8 @@
             />
           </div>
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
-          <button type="button" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="installDialogVisible = false">{{ $t('plugin.cancel') }}</button>
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
+          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="installDialogVisible = false">{{ $t('plugin.cancel') }}</button>
           <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="installing" @click="handleInstall">{{ $t('plugin.install') }}</button>
         </div>
       </div>
@@ -832,7 +832,7 @@
     <!-- Update Plugin Dialog -->
     <Modal v-model="updateDialogVisible" content-class="max-w-md">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.update') }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="updateDialogVisible = false">
             <IconClose class="w-6 h-6" />
@@ -875,8 +875,8 @@
             />
           </div>
         </div>
-        <div class="flex justify-end px-6 py-4 border-t border-gray-200 dark:border-gray-700">
-          <button type="button" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="updateDialogVisible = false">{{ $t('plugin.cancel') }}</button>
+        <div class="flex justify-end px-6 py-4 border-t border-divider">
+          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="updateDialogVisible = false">{{ $t('plugin.cancel') }}</button>
           <button type="button" class="px-4 py-2 ml-2 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="enqueueingUpdates || !selectedUpdateItems.length" @click="confirmUpdate">{{ $t('plugin.update') }}</button>
         </div>
       </div>
@@ -885,7 +885,7 @@
     <!-- Plugin Details Dialog -->
     <Modal v-model="pluginDetailsVisible" content-class="max-w-4xl">
       <div v-if="selectedPlugin" class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full h-[90dvh] flex flex-col overflow-hidden">
-        <div class="flex items-start justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-start justify-between px-6 py-4 border-b border-divider">
           <div class="min-w-0 pr-4">
             <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.details_title') }}</h3>
             <p class="mt-1 text-sm text-theme-subtle break-words">
@@ -941,7 +941,7 @@
           </div>
 
           <div>
-            <div role="tablist" :aria-label="$t('plugin.details_title')" class="flex gap-4 border-b border-gray-200 dark:border-gray-700" @keydown="onPluginDetailsTabKeydown">
+            <div role="tablist" :aria-label="$t('plugin.details_title')" class="flex gap-4 border-b border-divider" @keydown="onPluginDetailsTabKeydown">
               <button
                 v-for="tab in pluginDetailsTabs"
                 :id="`plugin-details-tab-${tab}`"
@@ -978,7 +978,7 @@
 
     <Modal v-model="pluginConfigVisible" content-class="max-w-md">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <div>
             <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.config_modal_title') }}</h3>
             <p class="mt-1 text-sm text-theme-subtle">{{ configPluginName }}</p>
@@ -999,8 +999,8 @@
             <p>{{ $t('plugin.no_config') }}</p>
           </div>
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
-          <button type="button" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="pluginConfigVisible = false">{{ $t('plugin.cancel') }}</button>
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
+          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="pluginConfigVisible = false">{{ $t('plugin.cancel') }}</button>
           <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="!hasPluginConfigFields || savingConfig" @click="savePluginConfig">{{ $t('plugin.save') }}</button>
         </div>
       </div>
@@ -1011,7 +1011,7 @@
     <!-- Skills Upload Dialog -->
     <Modal v-model="skillsUploadVisible" content-class="max-w-md">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col" style="max-height: 90vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.skills_upload') }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="skillsUploadVisible = false">
             <IconClose class="w-6 h-6" />
@@ -1027,8 +1027,8 @@
             :reselect-fallback="$t('plugin.upload_hint')"
           />
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
-          <button type="button" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="skillsUploadVisible = false">{{ $t('plugin.cancel') }}</button>
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
+          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="skillsUploadVisible = false">{{ $t('plugin.cancel') }}</button>
           <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="uploadingSkill" @click="handleSkillUpload">{{ $t('plugin.skills_upload_btn') }}</button>
         </div>
       </div>
@@ -1037,7 +1037,7 @@
     <!-- MCP Config Dialog -->
     <Modal v-model="mcpDialogVisible" content-class="max-w-4xl">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 95vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ mcpEditMode ? $t('plugin.mcp_edit') : $t('plugin.mcp_add') }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="mcpDialogVisible = false">
             <IconClose class="w-6 h-6" />
@@ -1074,8 +1074,8 @@
             <MonacoEditor v-model="mcpConfigJson" language="json" height="300px" />
           </div>
         </div>
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
-          <button type="button" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="mcpDialogVisible = false">{{ $t('plugin.cancel') }}</button>
+        <div class="px-6 py-4 border-t border-divider flex justify-end space-x-3">
+          <button type="button" class="px-4 py-2 border border-control rounded-lg text-theme-body hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" @click="mcpDialogVisible = false">{{ $t('plugin.cancel') }}</button>
           <button type="button" class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" :disabled="savingMcp" @click="saveMcpForm">{{ $t('plugin.save') }}</button>
         </div>
       </div>
@@ -1084,7 +1084,7 @@
     <!-- MCP Tools Dialog -->
     <Modal v-model="mcpToolsDialogVisible" content-class="max-w-2xl">
       <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 80vh;">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">{{ $t('plugin.mcp_tools_title', { name: selectedMcpServer?.name || selectedMcpServer?.id || '' }) }}</h3>
           <button type="button" class="text-theme-faint text-theme-faint-hover" @click="mcpToolsDialogVisible = false">
             <IconClose class="w-6 h-6" />
@@ -1098,7 +1098,7 @@
           <p v-else-if="mcpTools.length === 0" class="py-4 text-center text-sm text-theme-subtle">{{ $t('plugin.mcp_tools_empty') }}</p>
           <div v-else class="space-y-3">
             <p class="text-xs text-theme-faint">{{ $t('plugin.mcp_tool_toggle_hint') }}</p>
-            <div v-for="tool in mcpTools" :key="tool.name" class="rounded-lg border border-gray-200 p-3 dark:border-gray-700">
+            <div v-for="tool in mcpTools" :key="tool.name" class="rounded-lg border border-divider p-3">
               <div class="flex items-start justify-between gap-3">
                 <div class="min-w-0">
                   <code class="text-sm font-medium text-theme-high">{{ tool.name }}</code>

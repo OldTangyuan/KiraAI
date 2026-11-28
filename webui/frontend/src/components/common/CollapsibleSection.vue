@@ -1,7 +1,7 @@
 <template>
   <div class="collapsible-section">
     <div
-      class="collapsible-section-header flex items-center justify-between px-4 py-3 cursor-pointer rounded-t-lg select-none transition-colors duration-150 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 border border-gray-200 dark:border-gray-700"
+      class="collapsible-section-header flex items-center justify-between px-4 py-3 cursor-pointer rounded-t-lg select-none transition-colors duration-150 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 border border-divider"
       :class="{ 'rounded-b-lg': isCollapsed }"
       role="button"
       tabindex="0"
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div
-      class="collapsible-section-body border border-t-0 border-gray-200 dark:border-gray-700 rounded-b-lg bg-white dark:bg-gray-900 overflow-x-hidden transition-all duration-200"
+      class="collapsible-section-body border border-t-0 border-divider rounded-b-lg bg-white dark:bg-gray-900 overflow-x-hidden transition-all duration-200"
       :class="{ 'max-h-0 opacity-0 py-0 border-0 overflow-hidden': isCollapsed, 'max-h-[2000px] opacity-100 overflow-y-auto': !isCollapsed }"
     >
       <div class="p-4">
