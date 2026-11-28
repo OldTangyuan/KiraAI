@@ -39,7 +39,7 @@
       <div
         v-for="sticker in stickers"
         :key="sticker.id"
-        class="bg-white dark:bg-gray-900 rounded-lg shadow overflow-hidden flex flex-col"
+        class="glass-card rounded-lg shadow overflow-hidden flex flex-col"
       >
         <div class="relative bg-gray-100 dark:bg-gray-800 flex items-center justify-center" style="padding-top: 100%;">
           <img
@@ -75,7 +75,7 @@
 
     <!-- Create/Edit Modal -->
     <Modal v-model="dialogVisible" content-class="max-w-md">
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 90vh;">
+      <div class="glass-card rounded-lg shadow-xl w-full flex flex-col modal-card" style="max-height: 90vh;">
         <div class="flex justify-between items-center px-6 py-4 border-b border-divider">
           <h3 class="text-lg font-semibold text-theme-strong">
             {{ editMode ? $t('sticker.modal_title_edit') : $t('sticker.modal_title_add') }}

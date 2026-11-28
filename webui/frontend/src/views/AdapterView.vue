@@ -27,7 +27,7 @@
       <div
         v-for="adapter in adapters"
         :key="adapter.id"
-        class="bg-white dark:bg-gray-900 rounded-lg shadow p-5 flex flex-col justify-between"
+        class="glass-card rounded-lg shadow p-5 flex flex-col justify-between"
       >
         <div class="flex items-start justify-between mb-4">
           <div class="min-w-0 flex-1">

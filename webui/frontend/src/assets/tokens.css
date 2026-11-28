@@ -59,8 +59,8 @@
   --color-accent-tag-hover: rgba(59, 130, 246, 0.25);
   --color-accent-indicator: rgba(59, 130, 246, 0.4);
   --color-accent-indicator-active: #3b82f6;
-  --color-accent-selected: rgba(59, 130, 246, 0.15);
-  --color-accent-selected-border: rgba(59, 130, 246, 0.3);
+  --color-item-selected: #eff6ff;
+  --color-item-selected-border: #bfdbfe;
   --color-focus-ring: rgba(59, 130, 246, 0.5);
   --color-danger-border: #f87171;
   --color-danger-focus-ring: rgba(239, 68, 68, 0.5);
@@ -156,8 +156,8 @@
   --color-accent-tag-hover: rgba(30, 58, 138, 0.45);
   --color-accent-indicator: rgba(59, 130, 246, 0.4);
   --color-accent-indicator-active: #3b82f6;
-  --color-accent-selected: rgba(59, 130, 246, 0.15);
-  --color-accent-selected-border: rgba(59, 130, 246, 0.3);
+  --color-item-selected: rgba(59, 130, 246, 0.15);
+  --color-item-selected-border: rgba(59, 130, 246, 0.3);
   --color-focus-ring: rgba(59, 130, 246, 0.5);
   --color-danger-border: #ef4444;
   --color-danger-focus-ring: rgba(239, 68, 68, 0.5);

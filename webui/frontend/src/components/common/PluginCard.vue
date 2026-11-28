@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white dark:bg-gray-900 rounded-lg shadow p-4 flex flex-col"
+    class="glass-card rounded-lg shadow p-4 flex flex-col"
     :class="[error ? 'ring-1 ring-red-300 dark:ring-red-700' : '', 'cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500']"
     role="button"
     tabindex="0"
